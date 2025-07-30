@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom styles for the space theme and animations */
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            overflow: hidden; /* Prevents scrollbars from the moving elements */
+        }
+
+        /* Keyframe animation for the floating astronaut */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+
+        /* Keyframe animation for the twinkling stars */
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        .astronaut {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.2s ease-out; /* Smooth transition for parallax effect */
+        }
+        
+        .star.twinkle {
+            animation: twinkle 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
+    <!-- Background container for stars -->
+    <div id="stars-container" class="absolute top-0 left-0 w-full h-full"></div>
+
+    <!-- Main content container -->
+    <div class="text-center z-10 p-8">
+        <!-- Floating Astronaut SVG -->
+        <div class="relative w-48 h-48 mx-auto mb-8 astronaut">
+             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" fill="none" class="absolute inset-0 w-full h-full">
+                <!-- Helmet -->
+                <circle cx="100" cy="100" r="90" fill="#E5E7EB"/>
+                <circle cx="100" cy="100" r="85" fill="#1F2937"/>
+                <!-- Visor Reflection -->
+                <path d="M60 80 Q 100 50, 140 80 Q 150 120, 100 130 Q 50 120, 60 80 Z" fill="#9CA3AF" opacity="0.3"/>
+                <!-- Body -->
+                <path d="M100 190 Q 50 190, 50 140 L 150 140 Q 150 190, 100 190 Z" fill="#E5E7EB"/>
+                <rect x="80" y="130" width="40" height="20" fill="#9CA3AF"/>
+            </svg>
+        </div>
+
+        <h1 class="text-7xl md:text-9xl font-bold text-white drop-shadow-lg">404</h1>
+        <p class="text-2xl md:text-3xl font-light mt-4 text-gray-300">Oops! Looks like you're lost in space.</p>
+        <p class="mt-2 text-gray-400">The page you are looking for does not exist.</p>
+        
+        <!-- Home button -->
+        <a href="/" class="mt-8 inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition-transform transform hover:scale-105">
+            Go Back Home
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const starsContainer = document.getElementById('stars-container');
+            const numberOfStars = 150; // Adjust number of stars
+            let mouseX = 0;
+            let mouseY = 0;
+
+            // Update mouse coordinates on move
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Create stars and add them to the container
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                const size = Math.random() * 3 + 1; // Star size between 1px and 4px
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                // Position stars randomly across the screen
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+
+                // Add a data attribute for parallax speed
+                const parallaxSpeed = Math.random() * 0.05 + 0.01; // Random speed
+                star.dataset.speed = parallaxSpeed;
+
+                // Make some stars twinkle
+                if (Math.random() > 0.7) {
+                    star.classList.add('twinkle');
+                    star.style.animationDelay = `${Math.random() * 2}s`;
+                }
+
+                starsContainer.appendChild(star);
+            }
+            
+            // Parallax effect animation loop
+            function animateStars() {
+                const stars = document.querySelectorAll('.star');
+                const screenCenterX = window.innerWidth / 2;
+                const screenCenterY = window.innerHeight / 2;
+
+                stars.forEach(star => {
+                    const speed = parseFloat(star.dataset.speed);
+                    
+                    // Calculate movement based on mouse position relative to the center
+                    const moveX = (mouseX - screenCenterX) * speed;
+                    const moveY = (mouseY - screenCenterY) * speed;
+                    
+                    // Apply the transform
+                    star.style.transform = `translate(${moveX}px, ${moveY}px)`;
+                });
+
+                requestAnimationFrame(animateStars);
+            }
+
+            // Start the animation
+            animateStars();
+        });
+    </script>
+</body>
+</html>
