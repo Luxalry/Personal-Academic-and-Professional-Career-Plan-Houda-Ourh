@@ -545,22 +545,57 @@
             });
         }
 
-        document.getElementById('password-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const passwordInput = document.getElementById('password-input');
-            const passwordError = document.getElementById('password-error');
-            const correctPassword = "Hoda2025";
+        // --- بداية الكود الجديد ---
 
-            if (passwordInput.value === correctPassword) {
-                document.getElementById('password-overlay').style.display = 'none';
-                document.getElementById('main-content').style.display = 'block';
-                initializeApp();
-            } else {
-                passwordError.textContent = "كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخرى.";
-                passwordInput.classList.add('border-red-500');
-                passwordInput.value = "";
-            }
-        });
+// اسم المفتاح الذي سنستخدمه في مساحة التخزين
+const LOGIN_TIMESTAMP_KEY = 'hodaDashboardLoginTimestamp';
+// مدة صلاحية تسجيل الدخول بالأيام
+const LOGIN_EXPIRY_DAYS = 7;
+// تحويل الأيام إلى ميلي ثانية
+const EXPIRY_DURATION_MS = LOGIN_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
+
+// دالة لإظهار المحتوى الرئيسي وبدء تشغيل التطبيق
+function showContentAndInit() {
+    document.getElementById('password-overlay').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    initializeApp(); // هذه الدالة موجودة مسبقاً في الكود
+}
+
+// التحقق من حالة تسجيل الدخول عند تحميل الصفحة
+window.addEventListener('load', function() {
+    const lastLoginTimestamp = localStorage.getItem(LOGIN_TIMESTAMP_KEY);
+
+    if (lastLoginTimestamp) {
+        const isLoginValid = (Date.now() - parseInt(lastLoginTimestamp)) < EXPIRY_DURATION_MS;
+        if (isLoginValid) {
+            // إذا كان تسجيل الدخول لا يزال صالحًا، أظهر المحتوى مباشرة
+            showContentAndInit();
+            return; // توقف هنا ولا تظهر شاشة القفل
+        }
+    }
+    // إذا لم يكن هناك تسجيل دخول صالح، ستظل شاشة القفل ظاهرة
+});
+
+// التعامل مع إدخال كلمة المرور
+document.getElementById('password-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const passwordInput = document.getElementById('password-input');
+    const passwordError = document.getElementById('password-error');
+    const correctPassword = "Hoda2025";
+
+    if (passwordInput.value === correctPassword) {
+        // عند النجاح، قم بتخزين الوقت الحالي
+        localStorage.setItem(LOGIN_TIMESTAMP_KEY, Date.now().toString());
+        // ثم أظهر المحتوى
+        showContentAndInit();
+    } else {
+        passwordError.textContent = "كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخرى.";
+        passwordInput.classList.add('border-red-500');
+        passwordInput.value = "";
+    }
+});
+
+// --- نهاية الكود الجديد ---
     </script>
 </body>
 </html>
