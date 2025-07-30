@@ -9,10 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Chosen Palette: Calm Harmony (Warm Neutrals with Indigo Accent) -->
-    <!-- Application Structure Plan: The dashboard is restructured to mirror the user's strategic PDF, creating a narrative flow: 1. Diagnosis (Application Status), 2. Exploration (Track Details), 3. Strategy (The ENCG Bridge & LP options), 4. Execution (Job Market & Action Plan). This structure guides the user logically from understanding her current state to making future decisions. New high-value additions include an interactive explainer for application statuses, detailed curriculum info, and specific, actionable Licence Professionnelle recommendations. -->
-    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification. 1. Status Difference -> Inform -> Clickable info cards -> Clarifies critical but subtle terminology from the report. 2. Curriculum Details -> Inform -> Tabbed content with lists -> Provides deep, structured information without clutter. 3. LP Recommendations -> Guide -> Interactive cards per DTS track -> Makes the abstract "bridge" concept concrete and actionable. 4. Timeline -> Organize -> Accordion/Tabbed timeline -> Structures the action plan into clear, manageable timeframes (Immediate, Medium, Long-term). -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <!-- UPDATE: The strategic narrative is now reframed around two co-equal core paths: The Technical Expert Path vs. The Management Path. This provides more flexibility and removes the assumption that ENCG is the only goal. Section 3 is completely rebuilt to reflect this, offering a clear comparison. Section 5's action plans are updated to align with this new dual-path framework. The "myth" section is replaced with a clearer, more neutral explanation of ENCG admission rules for Bac+2 holders. -->
     <style>
         body {
             font-family: 'Tajawal', sans-serif;
@@ -106,10 +103,10 @@
                     <h2 data-key="s1_title" class="text-xl md:text-2xl font-bold mb-6 tajawal-bold border-b-2 border-indigo-500 pb-2">1. التشخيص: وضعية ترشيحكِ الحالية</h2>
                     <p data-key="s1_desc" class="mb-8 text-gray-600 tajawal-regular">هذا القسم يفكك حالة طلبكِ الحالية بدقة، موضحاً المعنى العملي لكل حالة واحتمالية القبول المرتبطة بها لتكوين صورة واقعية عن فرصكِ.</p>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 text-center">
-                        <div class="bg-gray-100 p-4 rounded-lg border border-gray-200"><h3 data-key="track1_name" class="font-bold text-md md:text-lg tajawal-bold">التطوير الرقمي</h3><p data-key="track1_status" class="text-orange-500 font-semibold my-2 tajawal-medium">🟠 في لائحة الانتظar</p><p data-key="track1_chance" class="text-sm text-gray-500 tajawal-regular">فرصة متوسطة، تعتمد على انسحاب المقبولين.</p></div>
+                        <div class="bg-gray-100 p-4 rounded-lg border border-gray-200"><h3 data-key="track1_name" class="font-bold text-md md:text-lg tajawal-bold">التطوير الرقمي</h3><p data-key="track1_status" class="text-orange-500 font-semibold my-2 tajawal-medium">🟠 في لائحة الانتظار</p><p data-key="track1_chance" class="text-sm text-gray-500 tajawal-regular">فرصة متوسطة، تعتمد على انسحاب المقبولين.</p></div>
                         <div class="bg-gray-100 p-4 rounded-lg border border-gray-200"><h3 data-key="track2_name" class="font-bold text-md md:text-lg tajawal-bold">البنية التحتية الرقمية</h3><p data-key="track2_status" class="text-red-500 font-semibold my-2 tajawal-medium">🟠 لائحة التنظيم (Régulation)</p><p data-key="track2_chance" class="text-sm text-gray-500 tajawal-regular">فرصة ضعيفة جداً، منافسة على مستوى جهوي.</p></div>
                         <div class="bg-gray-100 p-4 rounded-lg border border-gray-200"><h3 data-key="track3_name" class="font-bold text-md md:text-lg tajawal-bold">تسيير المقاولات</h3><p data-key="track3_status" class="text-red-500 font-semibold my-2 tajawal-medium">🟠 لائحة التنظيم (Régulation)</p><p data-key="track3_chance" class="text-sm text-gray-500 tajawal-regular">فرصة ضعيفة جداً، لكنه المسار الأنسب لهدف ENCG.</p></div>
-                        <div class="bg-gray-100 p-4 rounded-lg border border-gray-200"><h3 data-key="track4_name" class="font-bold text-md md:text-lg tajawal-bold">التطوير الرقمي (1A)</h3><p data-key="track4_status" class="text-blue-500 font-semibold my-2 tajawal-medium">⏳ قيد الانتظar</p><p data-key="track4_chance" class="text-sm text-gray-500 tajawal-regular">فرصة متبقية غير معروفة، يجب متابعتها.</p></div>
+                        <div class="bg-gray-100 p-4 rounded-lg border border-gray-200"><h3 data-key="track4_name" class="font-bold text-md md:text-lg tajawal-bold">التطوير الرقمي (1A)</h3><p data-key="track4_status" class="text-blue-500 font-semibold my-2 tajawal-medium">⏳ قيد الانتظار</p><p data-key="track4_chance" class="text-sm text-gray-500 tajawal-regular">فرصة متبقية غير معروفة، يجب متابعتها.</p></div>
                     </div>
                      <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="bg-orange-50 border-orange-500 p-4 rounded ltr:border-l-4 rtl:border-r-4"><h4 class="font-bold text-orange-900 tajawal-bold" data-key="status_waiting_title">ما معنى "لائحة الانتظار"؟</h4><p class="text-sm text-orange-800 mt-1 tajawal-regular" data-key="status_waiting_desc">لقد استوفيتِ المعايير، وقبولكِ يعتمد على انسحاب مرشحين مقبولين **في نفس المعهد والتخصص**.</p></div>
@@ -144,20 +141,46 @@
                     </div>
                 </section>
 
-                <section id="encg-bridge" class="section-card">
-                    <h2 data-key="s3_title" class="text-xl md:text-2xl font-bold mb-6 tajawal-bold border-b-2 border-indigo-500 pb-2">3. الاستراتيجية: بناء جسركِ نحو ENCG</h2>
-                    <p data-key="s3_desc" class="mb-8 text-gray-600 tajawal-regular">هدف ENCG قابل للتحقيق، ولكن ليس بالطريق المباشر. الإجازة المهنية (LP) هي الجسر الإلزامي الذي يحول ملفكِ من تقني إلى جامعي، مما يفتح لكِ أبواب الماستر.</p>
+                <section id="strategy" class="section-card">
+                    <h2 data-key="s3_title" class="text-xl md:text-2xl font-bold mb-6 tajawal-bold border-b-2 border-indigo-500 pb-2">3. الاستراتيجية: تحديد مساركِ المستقبلي</h2>
+                <p data-key="s3_desc1" class="mb-8 text-gray-600 tajawal-regular">هدف ENCG قابل للتحقيق، ولكن ليس بالطريق المباشر. الإجازة المهنية (LP) هي الجسر الإلزامي الذي يحول ملفكِ من تقني إلى جامعي، مما يفتح لكِ أبواب الماستر.</p>
                     <div class="bg-red-50 border-red-500 p-4 rounded ltr:border-l-4 rtl:border-r-4 mb-8">
-                        <h4 class="font-bold text-red-900 tajawal-bold" data-key="myth_title">🚨 تصحيح مهم: خرافة الجسر المباشر</h4>
-                        <p class="text-sm text-red-800 mt-1 tajawal-regular" data-key="myth_desc">دبلوم التقني المتخصص (DTS) **لا يؤهل مباشرة** لولوج السنة الثالثة (S5) في ENCG. الاعتماد على هذا المسار استراتيجية عالية المخاطر وغير موصى بها.</p>
+                        <h4 class="font-bold text-red-900 tajawal-bold" data-key="myth_title1">🚨 تصحيح مهم: خرافة الجسر المباشر</h4>
+                        <p class="text-sm text-red-800 mt-1 tajawal-regular" data-key="myth_desc1">دبلوم التقني المتخصص (DTS) **لا يؤهل مباشرة** لولوج السنة الثالثة (S5) في ENCG. الاعتماد على هذا المسار استراتيجية عالية المخاطر وغير موصى بها.</p>
                     </div>
-                    <h3 class="text-lg md:text-xl font-bold mb-4 tajawal-bold" data-key="lp_bridge_title">الجسر المضمون: برامج الإجازة المهنية (LP) الموصى بها</h3>
-                    <p class="text-gray-600 mb-6 tajawal-regular" data-key="lp_bridge_desc">بناءً على تخصصكِ في OFPPT، هذه هي أفضل برامج الإجازة المهنية التي يمكنكِ استهدافها لإعادة تشكيل ملفكِ الأكاديمي وتحقيق "الانعطاف" الاستراتيجي نحو الإدارة إذا لزم الأمر.</p>
+
+                    <p data-key="s3_desc" class="mb-8 text-gray-600 tajawal-regular">بناءً على وضعك الحالي، أنتِ الآن عند مفترق طرق استراتيجي. لديكِ مساران رئيسيان، لكل منهما مزاياه وتحدياته. هذا القسم لمساعدتك على المقارنة واتخاذ القرار.</p>
+                    
+                    <div class="bg-blue-50 border-blue-500 p-4 rounded ltr:border-l-4 rtl:border-r-4 mb-8">
+                        <h4 class="font-bold text-blue-900 tajawal-bold" data-key="s3_clarification_title">توضيح هام: كيف يمكن لحامل DTS ولوج ENCG؟</h4>
+                        <p class="text-sm text-blue-800 mt-1 tajawal-regular" data-key="s3_clarification_desc">الولوج من السنة الأولى (عبر TAFEM) مخصص لحاملي البكالوريا فقط. بالنسبة لكِ (كحاملة DTS Bac+2)، الطريق الوحيد الممكن هو عبر "الممرات" (Passerelles) لولوج السنوات المتقدمة، ويتطلب هذا **إلزامياً** الحصول على شهادة Bac+3 (مثل الإجازة المهنية) أولاً لولوج السنة الرابعة (الماستر).</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="p-4 border rounded-lg bg-gray-50">
+                            <h3 data-key="s3_path1_title" class="text-lg font-bold text-indigo-800 tajawal-bold">المسار الأول: الخبيرة التقنية (المسار السريع)</h3>
+                            <p data-key="s3_path1_desc" class="mt-2 text-sm text-gray-600 tajawal-regular">التركيز الكامل على التخصص التقني (تطوير أو بنية تحتية)، بهدف دخول سوق الشغل بسرعة وتحقيق استقلال مالي. المسار يعتمد على تعزيز الخبرة عبر الشهادات المهنية القوية.</p>
+                            <ul class="mt-4 space-y-2 text-sm tajawal-regular">
+                                <li class="flex items-start"><span class="text-green-500 rtl:ml-2 ltr:mr-2 mt-1">✔</span><div><strong data-key="s3_path1_pro1_title">ميزة:</strong> <span data-key="s3_path1_pro1_desc">راتب ابتدائي مرتفع وسرعة في التوظيف.</span></div></li>
+                                <li class="flex items-start"><span class="text-red-500 rtl:ml-2 ltr:mr-2 mt-1">✖</span><div><strong data-key="s3_path1_con1_title">تحدي:</strong> <span data-key="s3_path1_con1_desc">يبتعد عن هدف الإدارة وقد يتطلب "انعطافاً" مهنياً لاحقاً إذا غيرتِ رأيك.</span></div></li>
+                            </ul>
+                        </div>
+                        <div class="p-4 border rounded-lg bg-gray-50">
+                             <h3 data-key="s3_path2_title" class="text-lg font-bold text-teal-800 tajawal-bold">المسار الثاني: قائدة المستقبل (مسار الماراثون)</h3>
+                             <p data-key="s3_path2_desc" class="mt-2 text-sm text-gray-600 tajawal-regular">استخدام دبلوم DTS كنقطة انطلاق، ثم عبور "الجسر" الأكاديمي عبر إجازة مهنية (LP) مختارة بعناية، بهدف الوصول إلى ماستر في ENCG أو كلية إدارة أخرى.</p>
+                             <ul class="mt-4 space-y-2 text-sm tajawal-regular">
+                                <li class="flex items-start"><span class="text-green-500 rtl:ml-2 ltr:mr-2 mt-1">✔</span><div><strong data-key="s3_path2_pro1_title">ميزة:</strong> <span data-key="s3_path2_pro1_desc">إمكانات نمو هائلة ومناصب قيادية على المدى الطويل.</span></div></li>
+                                <li class="flex items-start"><span class="text-red-500 rtl:ml-2 ltr:mr-2 mt-1">✖</span><div><strong data-key="s3_path2_con1_title">تحدي:</strong> <span data-key="s3_path2_con1_desc">مسار أطول (3 سنوات إضافية) ويتطلب تفوقاً أكاديمياً مستمراً.</span></div></li>
+                            </ul>
+                        </div>
+                    </div>
+                     <h3 class="text-lg md:text-xl font-bold mt-8 mb-4 tajawal-bold" data-key="lp_bridge_title">الجسر الأكاديمي: برامج الإجازة المهنية (LP) الموصى بها</h3>
+                    <p class="text-gray-600 mb-6 tajawal-regular" data-key="lp_bridge_desc">سواء اخترتِ المسار الثاني أو أردتِ ترك الباب مفتوحاً، وبناءً على تخصصكِ في OFPPT، هذه هي أفضل برامج الإجازة المهنية التي يمكنكِ استهدافها لإعادة تشكيل ملفكِ الأكاديمي  وتحقيق 'الانعطاف' الاستراتيجي نحو الإدارة إذا لزم الأمر..</p>
                     <div id="lp-recommendations" class="space-y-4"></div>
                 </section>
 
                 <section id="job-market" class="section-card">
-                    <h2 data-key="s4_title" class="text-xl md:text-2xl font-bold mb-6 tajawal-bold border-b-2 border-indigo-500 pb-2">4. التنفيذ (خطة ب): الارتباط بسوق الشغل</h2>
+                    <h2 data-key="s4_title" class="text-xl md:text-2xl font-bold mb-6 tajawal-bold border-b-2 border-indigo-500 pb-2">4. التنفيذ: الارتباط بسوق الشغل</h2>
                     <p data-key="s4_desc" class="mb-8 text-gray-600 tajawal-regular">سواء كخيار أساسي أو كخطة بديلة، يوفر دبلوم OFPPT فرصاً قوية في سوق الشغل. هذا القسم يوضح لكِ أين تكمن الفرص وكيف تعززين قيمتكِ.</p>
                     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
                         <div>
@@ -177,7 +200,7 @@
                 </section>
 
                 <section id="my-plan" class="section-card">
-                    <h2 data-key="s5_title" class="text-xl md:text-2xl font-bold mb-6 tajawal-bold border-b-2 border-indigo-500 pb-2">5. التنفيذ (خطة أ): خطتكِ الزمنية الشخصية</h2>
+                    <h2 data-key="s5_title" class="text-xl md:text-2xl font-bold mb-6 tajawal-bold border-b-2 border-indigo-500 pb-2">5. خطتكِ الزمنية الشخصية</h2>
                     <p data-key="s5_desc" class="mb-8 text-gray-600 tajawal-regular">هذا هو الجزء العملي. بناءً على نتيجة قبولكِ النهائية، اختاري السيناريو المناسب لكِ لرؤية خطة العمل الموصى بها مقسمة حسب الجدول الزمني.</p>
                     <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-8">
                         <button class="scenario-btn px-3 py-2 md:px-4 rounded-lg font-semibold transition text-sm md:text-base tajawal-medium active" data-scenario="b" data-key="scenario_b">السيناريو (ب): القبول في مسار تقني</button>
@@ -226,13 +249,28 @@
                 curriculum_title: "أبرز محاور المنهج الدراسي:",
                 label_salary: "متوسط الراتب المبدئي:",
                 label_goal: "التوافق مع هدف ENCG:",
-                s3_title: "3. الاستراتيجية: بناء جسركِ نحو ENCG",
-                s3_desc: "هدف ENCG قابل للتحقيق، ولكن ليس بالطريق المباشر. الإجازة المهنية (LP) هي الجسر الإلزامي الذي يحول ملفكِ من تقني إلى جامعي، مما يفتح لكِ أبواب الماستر.",
-                myth_title: "🚨 تصحيح مهم: خرافة الجسر المباشر",
-                myth_desc: "دبلوم التقني المتخصص (DTS) **لا يؤهل مباشرة** لولوج السنة الثالثة (S5) في ENCG. الاعتماد على هذا المسار استراتيجية عالية المخاطر وغير موصى بها.",
-                lp_bridge_title: "الجسر المضمون: برامج الإجازة المهنية (LP) الموصى بها",
-                lp_bridge_desc: "بناءً على تخصصكِ في OFPPT، هذه هي أفضل برامج الإجازة المهنية التي يمكنكِ استهدافها لإعادة تشكيل ملفكِ الأكاديمي وتحقيق 'الانعطاف' الاستراتيجي نحو الإدارة إذا لزم الأمر.",
-                s4_title: "4. التنفيذ (خطة ب): الارتباط بسوق الشغل",
+                s3_title: "3. الاستراتيجية: تحديد مساركِ المستقبلي",
+                s3_desc1: "هدف ENCG قابل للتحقيق، ولكن ليس بالطريق المباشر. الإجازة المهنية (LP) هي الجسر الإلزامي الذي يحول ملفكِ من تقني إلى جامعي، مما يفتح لكِ أبواب الماستر.",
+                myth_title1: "🚨 تصحيح مهم: خرافة الجسر المباشر",
+                myth_desc1: "دبلوم التقني المتخصص (DTS) **لا يؤهل مباشرة** لولوج السنة الثالثة (S5) في ENCG. الاعتماد على هذا المسار استراتيجية عالية المخاطر وغير موصى بها.",
+                s3_desc: "بناءً على وضعك الحالي، أنتِ الآن عند مفترق طرق استراتيجي. لديكِ مساران رئيسيان، لكل منهما مزاياه وتحدياته. هذا القسم لمساعدتك على المقارنة واتخاذ القرار.",
+                s3_clarification_title: "توضيح هام: كيف يمكن لحامل DTS ولوج ENCG؟",
+                s3_clarification_desc: "الولوج من السنة الأولى (عبر TAFEM) مخصص لحاملي البكالوريا فقط. بالنسبة لكِ (كحاملة DTS Bac+2)، الطريق الوحيد الممكن هو عبر \"الممرات\" (Passerelles) لولوج السنوات المتقدمة، ويتطلب هذا **إلزامياً** الحصول على شهادة Bac+3 (مثل الإجازة المهنية) أولاً لولوج السنة الرابعة (الماستر).",
+                s3_path1_title: "المسار الأول: الخبيرة التقنية (المسار السريع)",
+                s3_path1_desc: "التركيز الكامل على التخصص التقني (تطوير أو بنية تحتية)، بهدف دخول سوق الشغل بسرعة وتحقيق استقلال مالي. المسار يعتمد على تعزيز الخبرة عبر الشهادات المهنية القوية.",
+                s3_path1_pro1_title: "ميزة:",
+                s3_path1_pro1_desc: "راتب ابتدائي مرتفع وسرعة في التوظيف.",
+                s3_path1_con1_title: "تحدي:",
+                s3_path1_con1_desc: "يبتعد عن هدف الإدارة وقد يتطلب \"انعطافاً\" مهنياً لاحقاً إذا غيرتِ رأيك.",
+                s3_path2_title: "المسار الثاني: قائدة المستقبل (مسار الماراثون)",
+                s3_path2_desc: "استخدام دبلوم DTS كنقطة انطلاق، ثم عبور \"الجسر\" الأكاديمي عبر إجازة مهنية (LP) مختارة بعناية، بهدف الوصول إلى ماستر في ENCG أو كلية إدارة أخرى.",
+                s3_path2_pro1_title: "ميزة:",
+                s3_path2_pro1_desc: "إمكانات نمو هائلة ومناصب قيادية على المدى الطويل.",
+                s3_path2_con1_title: "تحدي:",
+                s3_path2_con1_desc: "مسار أطول (3 سنوات إضافية) ويتطلب تفوقاً أكاديمياً مستمراً.",
+                lp_bridge_title: "الجسر الأكاديمي: برامج الإجازة المهنية (LP) الموصى بها",
+                lp_bridge_desc: "سواء اخترتِ المسار الثاني أو أردتِ ترك الباب مفتوحاً، وبناءً على تخصصكِ في OFPPT، هذه هي أفضل برامج الإجازة المهنية التي يمكنكِ استهدافها لإعادة تشكيل ملفكِ الأكاديمي  وتحقيق 'الانعطاف' الاستراتيجي نحو الإدارة إذا لزم الأمر..",
+                s4_title: "4. التنفيذ: الارتباط بسوق الشغل",
                 s4_desc: "سواء كخيار أساسي أو كخطة بديلة، يوفر دبلوم OFPPT فرصاً قوية في سوق الشغل. هذا القسم يوضح لكِ أين تكمن الفرص وكيف تعززين قيمتكِ.",
                 s4_chart_title: "القطاعات الأكثر توظيفاً في المغرب (2025-2027)",
                 s4_certs_title: "عززي ملفكِ بشهادات مهنية",
@@ -240,7 +278,7 @@
                 cert_dev_title: "للتطوير الرقمي:",
                 cert_infra_title: "للبنية التحتية:",
                 cert_gestion_title: "لتسيير المقاولات:",
-                s5_title: "5. التنفيذ (خطة أ): خطتكِ الزمنية الشخصية",
+                s5_title: "5. خطتكِ الزمنية الشخصية",
                 s5_desc: "هذا هو الجزء العملي. بناءً على نتيجة قبولكِ النهائية، اختاري السيناريو المناسب لكِ لرؤية خطة العمل الموصى بها مقسمة حسب الجدول الزمني.",
                 scenario_a: "السيناريو (أ): القبول في تسيير المقاولات",
                 scenario_b: "السيناريو (ب): القبول في مسار تقني",
@@ -253,14 +291,14 @@
                     gestion: { title: 'تسيير المقاولات (Gestion des Entreprises)', description: 'التخصص الأكثر تنوعاً وتوجهاً نحو الأعمال، ويؤهلكِ للتعامل مع المهام الإدارية والمحاسبية والتجارية.', salary: '5,000 - 7,000 درهم', goal: 'مرتفع', curriculum: "<ul><li class='mt-1'><strong>السنة 1:</strong> المحاسبة العامة، مبادئ التسويق، قانون الأعمال، الإحصاء.</li><li class='mt-1'><strong>السنة 2 (تخصص):</strong> التسويق الاستراتيجي، جبايات المقاولة، إدارة الموارد البشرية، تدبير المشاريع.</li></ul>", chartData: [9, 8, 5, 6] }
                 },
                 lp_data: {
-                    dev: [{ name: "Ingénierie des Applications Web et Mobiles", school: "EST سلا - UM5", value: "بناء على مهاراتكِ التقنية مع توفير دبلوم جامعي." }, { name: "Développement Web Full Stack et DevOps", school: "MegaCampus (خاص)", value: "اكتساب مهارات متقدمة ومطلوبة في السوق." }],
-                    infra: [{ name: "Administration des Systèmes, Réseaux et Cyber Sécurité", school: "EST الدار البيضاء - UH2C", value: "تعميق تخصصكِ في مجال حيوي." }, { name: "Administration et Cybersécurité", school: "ENSET المحمدية", value: "الحصول على دبلوم جامعي مع تخصص أمني قوي." }],
+                    dev: [{ name: "Ingénierie des Applications Web et Mobiles", school: "EST سلا - UM5", value: "بناء على مهاراتكِ التقنية مع توفير دبلوم جامعي." }, { name: "Marketing Digital et E-Business", school: "FSJES السويسي - UM5", value: "إجازة محورية مثالية للانعطاف نحو الإدارة." }],
+                    infra: [{ name: "Administration des Systèmes, Réseaux et Cyber Sécurité", school: "EST الدار البيضاء - UH2C", value: "تعميق تخصصكِ في مجال حيوي." }, { name: "Management et Systèmes d'Information", school: "ENSIAS - UM5", value: "إجازة محورية نادرة تجمع بين البنية التحتية والإدارة." }],
                     gestion: [{ name: "Marketing Management Digital et Commerce Electronique", school: "FSJES السويسي - UM5", value: "الجسر الأكثر مباشرة لماستر ENCG في مجال ذي صلة." }, { name: "Management des Organisations: Création et Gestion des PME", school: "FSJES عين الشق - UH2C", value: "تطوير مهارات إدارية شاملة ومباشرة." }]
                 },
                 plan_data: {
-                    a: { immediate: "<strong>قبول العرض فوراً.</strong> هذه هي 'التذكرة الذهبية' لهدفك.", medium: "<strong>التفوق الأكاديمي</strong> والحصول على شهادة Google Digital Marketing.", long: "التقديم لإجازة مهنية في التسويق/الإدارة، ثم التقديم لبرامج الماستر في ENCG." },
-                    b: { immediate: "<strong>قبول العرض.</strong> هذا مسار مهني ممتاز ونتيجتكِ الأكثر ترجيحاً.", medium: "<strong>نقطة القرار:</strong> هل تلتزمين بالمسار التقني أم تستهدفين ENCG؟ إذا اخترتِ التقني، احصلي على شهادات (AWS, CCNA).", long: "إذا بقي هدف ENCG، ابحثي عن إجازة مهنية 'محورية' تجمع بين تكنولوجيا المعلومات والإدارة (مثل E-Business)." },
-                    c: { immediate: "<strong>التحقق من موقع OFPPT</strong> بحثاً عن مراحل قبول إضافية.", medium: "<strong>إعادة التقييم:</strong> التفكير في التقديم لبرامج DUT أو BTS للعام القادم.", long: "<strong>كخيار بديل،</strong> التسجيل في كلية الاقتصاد للحصول على DEUG، وهو مسار مباشر آخر لـ ENCG." }
+                    a: { immediate: "<strong>قبول العرض فوراً.</strong> هذا هو 'المسار الملكي' لهدف الإدارة.", medium: "<strong>التفوق الأكاديمي</strong> والحصول على شهادة Google Digital Marketing لتعزيز ملفك.", long: "التقديم لإجازة مهنية في التسويق/الإدارة، ثم التقديم لبرامج الماستر في ENCG." },
+                    b: { immediate: "<strong>قبول العرض.</strong> هذا مسار مهني ممتاز. <strong>أنتِ الآن عند نقطة قرار حاسمة.</strong>", medium: "<strong>الخيار 1 (الخبيرة التقنية):</strong> التركيز على التفوق في DTS والحصول على شهادات تقنية (AWS, CCNA). <strong>الخيار 2 (قائدة المستقبل):</strong> التفوق في DTS والبدء في البحث عن إجازة مهنية 'محورية' (مثل E-Business) للتحضير لـ ENCG.", long: "بناءً على قرارك: إما أن تكوني مطورة/خبيرة شبكات مطلوبة في السوق، أو تتابعين دراستك في الإجازة المهنية ثم ENCG." },
+                    c: { immediate: "<strong>التحقق من موقع OFPPT</strong> بحثاً عن مراحل قبول إضافية.", medium: "<strong>إعادة التقييم:</strong> التفكير في التقديم لبرامج DUT أو BTS للعام القادم (فهي تؤهل مباشرة لولوج S5 في ENCG).", long: "<strong>كخيار بديل،</strong> التسجيل في كلية الاقتصاد للحصول على DEUG، وهو مسار مباشر آخر لـ ENCG." }
                 },
                 timeline_titles: { immediate: "خطة العمل الفورية (أغسطس - سبتمبر 2025)", medium: "خطة العمل متوسطة المدى (2025 - 2027)", long: "الرؤية طويلة المدى (2027 وما بعدها)" },
                 charts: { radar_labels: ['التوافق مع ENCG', 'فرص الشغل', 'المهارات التقنية', 'الراتب المبدئي'], radar_dataset_label: 'تقييم المسار', bar_labels: ['تكنولوجيا المعلومات', 'البنوك والمالية', 'مراكز الاتصال', 'الصناعة', 'السياحة'], bar_dataset_label: 'الطلب على الوظائف', tooltip_label: 'مؤشر الطلب' }
@@ -294,13 +332,28 @@
                 curriculum_title: "Aperçu du cursus :",
                 label_salary: "Salaire de départ moyen :",
                 label_goal: "Alignement avec l'objectif ENCG :",
-                s3_title: "3. Stratégie : Construire votre pont vers l'ENCG",
-                s3_desc: "L'objectif ENCG est réalisable, mais pas par la voie directe. La Licence Professionnelle (LP) est le pont obligatoire qui transforme votre profil de technicien à universitaire, vous ouvrant les portes des masters.",
-                myth_title: "🚨 Correction importante : Le mythe de la passerelle directe",
-                myth_desc: "Le diplôme de Technicien Spécialisé (DTS) ne qualifie **pas directement** pour l'accès en troisième année (S5) de l'ENCG. Se fier à cette voie est une stratégie à haut risque et non recommandée.",
-                lp_bridge_title: "Le pont garanti : Licences Professionnelles (LP) recommandées",
-                lp_bridge_desc: "En fonction de votre spécialité OFPPT, voici les meilleurs programmes de LP à cibler pour remodeler votre profil académique et effectuer un 'pivot' stratégique vers la gestion si nécessaire.",
-                s4_title: "4. Exécution (Plan B) : Connexion au marché du travail",
+                s3_title: "3. Stratégie : Définir votre parcours futur",
+                s3_desc1: "L'objectif ENCG est réalisable, mais pas par la voie directe. La Licence Professionnelle (LP) est le pont obligatoire qui transforme votre profil de technicien à universitaire, vous ouvrant les portes des masters.",
+                myth_title1: "🚨 Correction importante : Le mythe de la passerelle directe",
+                myth_desc1: "Le diplôme de Technicien Spécialisé (DTS) ne qualifie **pas directement** pour l'accès en troisième année (S5) de l'ENCG. Se fier à cette voie est une stratégie à haut risque et non recommandée.",
+                s3_desc: "Sur la base de votre situation actuelle, vous êtes à un carrefour stratégique. Vous avez deux voies principales, chacune avec ses avantages et ses défis. Cette section vous aide à comparer et à décider.",
+                s3_clarification_title: "Clarification importante : Comment un titulaire de DTS peut-il intégrer l'ENCG ?",
+                s3_clarification_desc: "L'accès en première année (via TAFEM) est réservé aux bacheliers. Pour vous (en tant que titulaire d'un DTS Bac+2), la seule voie possible est via les 'passerelles' pour accéder aux années supérieures, ce qui nécessite **obligatoirement** d'obtenir un diplôme Bac+3 (comme une Licence Professionnelle) d'abord pour intégrer la 4ème année (Master).",
+                s3_path1_title: "Voie 1 : L'Experte Technique (La voie rapide)",
+                s3_path1_desc: "Se concentrer pleinement sur la spécialité technique (développement ou infrastructure), visant à entrer rapidement sur le marché du travail et à atteindre l'indépendance financière. Ce parcours repose sur le renforcement de l'expertise par des certifications professionnelles solides.",
+                s3_path1_pro1_title: "Avantage :",
+                s3_path1_pro1_desc: "Salaire de départ élevé et emploi rapide.",
+                s3_path1_con1_title: "Défi :",
+                s3_path1_con1_desc: "S'éloigne de l'objectif de management et peut nécessiter un 'pivot' de carrière plus tard si vous changez d'avis.",
+                s3_path2_title: "Voie 2 : La Future Leader (Le marathon)",
+                s3_path2_desc: "Utiliser le DTS comme un tremplin, puis franchir le 'pont' académique via une Licence Professionnelle (LP) soigneusement choisie, visant un master à l'ENCG ou une autre école de commerce.",
+                s3_path2_pro1_title: "Avantage :",
+                s3_path2_pro1_desc: "Potentiel de croissance et postes de direction énormes à long terme.",
+                s3_path2_con1_title: "Défi :",
+                s3_path2_con1_desc: "Parcours plus long (3 ans de plus) et nécessite une excellence académique continue.",
+                lp_bridge_title: "Le Pont Académique : Licences Professionnelles (LP) Recommandées",
+                lp_bridge_desc: "Que vous choisissiez la deuxième voie ou que vous souhaitiez laisser la porte ouverte, et en fonction de votre spécialisation OFPPT, voici les meilleurs programmes de diplômes professionnels que vous pouvez cibler pour remodeler votre profil académique et réaliser un « virage » stratégique vers la gestion si nécessaire.",
+                s4_title: "4. Exécution : Connexion au marché du travail",
                 s4_desc: "Que ce soit comme option principale ou plan de secours, le diplôme OFPPT offre de solides opportunités. Cette section vous montre où se trouvent les opportunités et comment augmenter votre valeur.",
                 s4_chart_title: "Secteurs les plus recruteurs au Maroc (2025-2027)",
                 s4_certs_title: "Renforcez votre profil avec des certifications professionnelles",
@@ -308,7 +361,7 @@
                 cert_dev_title: "Pour le Développement Digital :",
                 cert_infra_title: "Pour l'Infrastructure :",
                 cert_gestion_title: "Pour la Gestion d'Entreprises :",
-                s5_title: "5. Exécution (Plan A) : Votre calendrier personnel",
+                s5_title: "5. Votre calendrier personnel",
                 s5_desc: "C'est la partie pratique. En fonction de votre résultat d'admission final, choisissez le scénario qui vous convient pour voir le plan d'action recommandé, organisé par calendrier.",
                 scenario_a: "Scénario A : Admission en Gestion d'Entreprises",
                 scenario_b: "Scénario B : Admission en filière technique",
@@ -321,14 +374,14 @@
                     gestion: { title: 'Gestion des Entreprises', description: 'La spécialité la plus polyvalente et orientée business, vous préparant aux tâches administratives, comptables et commerciales.', salary: '5,000 - 7,000 MAD', goal: 'Élevé', curriculum: "<ul><li class='mt-1'><strong>An 1 :</strong> Comptabilité générale, Principes du marketing, Droit des affaires, Statistiques.</li><li class='mt-1'><strong>An 2 (Spé.) :</strong> Marketing stratégique, Fiscalité de l'entreprise, Gestion des RH, Gestion de projet.</li></ul>", chartData: [9, 8, 5, 6] }
                 },
                 lp_data: {
-                    dev: [{ name: "Ingénierie des Applications Web et Mobiles", school: "EST Salé - UM5", value: "Construire sur vos compétences techniques avec un diplôme universitaire." }, { name: "Développement Web Full Stack et DevOps", school: "MegaCampus (Privé)", value: "Acquérir des compétences avancées et demandées sur le marché." }],
-                    infra: [{ name: "Administration des Systèmes, Réseaux et Cyber Sécurité", school: "EST Casablanca - UH2C", value: "Approfondir votre spécialisation dans un domaine vital." }, { name: "Administration et Cybersécurité", school: "ENSET Mohammedia", value: "Obtenir un diplôme universitaire avec une forte spécialisation en sécurité." }],
+                    dev: [{ name: "Ingénierie des Applications Web et Mobiles", school: "EST Salé - UM5", value: "Construire sur vos compétences techniques avec un diplôme universitaire." }, { name: "Marketing Digital et E-Business", school: "FSJES Souissi - UM5", value: "LP pivot idéale pour pivoter vers le management." }],
+                    infra: [{ name: "Administration des Systèmes, Réseaux et Cyber Sécurité", school: "EST Casablanca - UH2C", value: "Approfondir votre spécialisation dans un domaine vital." }, { name: "Management et Systèmes d'Information", school: "ENSIAS - UM5", value: "LP pivot rare combinant infrastructure et management." }],
                     gestion: [{ name: "Marketing Management Digital et Commerce Electronique", school: "FSJES Souissi - UM5", value: "Le pont le plus direct vers un master ENCG dans un domaine pertinent." }, { name: "Management des Organisations: Création et Gestion des PME", school: "FSJES Ain Chock - UH2C", value: "Développer des compétences managériales complètes et directes." }]
                 },
                 plan_data: {
-                    a: { immediate: "<strong>Acceptez l'offre immédiatement.</strong> C'est votre 'Ticket d'Or' pour votre objectif.", medium: "<strong>Exceller académiquement</strong> et obtenir la certification Google Digital Marketing.", long: "Postuler à une LP en Marketing/Gestion, puis postuler aux programmes de Master de l'ENCG." },
-                    b: { immediate: "<strong>Acceptez l'offre.</strong> C'est une excellente voie de carrière et votre résultat le plus probable.", medium: "<strong>Point de décision :</strong> vous engagez-vous dans la voie technique ou visez-vous toujours l'ENCG ? Si technique, obtenez des certifications (AWS, CCNA).", long: "Si l'objectif ENCG demeure, cherchez une LP 'pivot' qui combine l'informatique et la gestion (ex: E-Business)." },
-                    c: { immediate: "<strong>Vérifiez le site de l'OFPPT</strong> pour des phases d'admission supplémentaires.", medium: "<strong>Réévaluez :</strong> Envisagez de postuler à des programmes DUT ou BTS pour l'année suivante.", long: "<strong>Comme alternative,</strong> inscrivez-vous en Faculté d'Économie pour obtenir un DEUG, une autre voie directe vers l'ENCG." }
+                    a: { immediate: "<strong>Acceptez l'offre immédiatement.</strong> C'est la 'voie royale' vers votre objectif de management.", medium: "<strong>Exceller académiquement</strong> et obtenir la certification Google Digital Marketing pour renforcer votre profil.", long: "Postuler à une LP en Marketing/Gestion, puis postuler aux programmes de Master de l'ENCG." },
+                    b: { immediate: "<strong>Acceptez l'offre.</strong> C'est une excellente voie de carrière. <strong>Vous êtes à un point de décision crucial.</strong>", medium: "<strong>Option 1 (Experte Tech) :</strong> Se concentrer sur l'excellence en DTS et obtenir des certifications techniques (AWS, CCNA). <strong>Option 2 (Future Leader) :</strong> Exceller en DTS et commencer à rechercher une LP 'pivot' (ex: E-Business) pour préparer l'ENCG.", long: "Selon votre décision : soit devenir une développeuse/experte réseau recherchée, soit poursuivre avec une LP puis l'ENCG." },
+                    c: { immediate: "<strong>Vérifiez le site de l'OFPPT</strong> pour des phases d'admission supplémentaires.", medium: "<strong>Réévaluez :</strong> Envisagez de postuler à des programmes DUT ou BTS pour l'année suivante (ils donnent un accès direct à la passerelle S5 de l'ENCG).", long: "<strong>Comme alternative,</strong> inscrivez-vous en Faculté d'Économie pour obtenir un DEUG, une autre voie directe vers l'ENCG." }
                 },
                 timeline_titles: { immediate: "Plan d'Action Immédiat (Août - Sept 2025)", medium: "Plan à Moyen Terme (2025 - 2027)", long: "Vision à Long Terme (2027 et au-delà)" },
                 charts: { radar_labels: ['Alignement ENCG', 'Opportunités d\'emploi', 'Compétences Techniques', 'Salaire de départ'], radar_dataset_label: 'Évaluation de la filière', bar_labels: ['Informatique', 'Banque & Finance', 'Centres d\'appels', 'Industrie', 'Tourisme'], bar_dataset_label: 'Demande d\'emploi', tooltip_label: 'Indice de demande' }
@@ -362,13 +415,28 @@
                 curriculum_title: "Curriculum Highlights:",
                 label_salary: "Average starting salary:",
                 label_goal: "Alignment with ENCG goal:",
-                s3_title: "3. Strategy: Building Your Bridge to ENCG",
-                s3_desc: "The ENCG goal is achievable, but not through the direct path. The Professional Bachelor's (LP) is the mandatory bridge that transforms your profile from technical to academic, opening the doors to master's programs.",
-                myth_title: "🚨 Important Correction: The Myth of the Direct Bridge",
-                myth_desc: "The Specialized Technician Diploma (DTS) does **not directly qualify** for entry into the third year (S5) of ENCG. Relying on this path is a high-risk, unrecommended strategy.",
-                lp_bridge_title: "The Guaranteed Bridge: Recommended Professional Bachelor's (LP) Programs",
-                lp_bridge_desc: "Based on your OFPPT specialization, these are the best LP programs to target to reshape your academic profile and make a strategic 'pivot' towards management if needed.",
-                s4_title: "4. Execution (Plan B): Connecting with the Job Market",
+                s3_title: "3. Strategy: Defining Your Future Path",
+                s3_desc1: "The ENCG goal is achievable, but not through the direct path. The Professional Bachelor's (LP) is the mandatory bridge that transforms your profile from technical to academic, opening the doors to master's programs.",
+                myth_title1: "🚨 Important Correction: The Myth of the Direct Bridge",
+                myth_desc1: "The Specialized Technician Diploma (DTS) does **not directly qualify** for entry into the third year (S5) of ENCG. Relying on this path is a high-risk, unrecommended strategy.",
+                s3_desc: "Based on your current situation, you are at a strategic crossroads. You have two main paths, each with its advantages and challenges. This section helps you compare and decide.",
+                s3_clarification_title: "Important Clarification: How can a DTS holder enter ENCG?",
+                s3_clarification_desc: "First-year entry (via TAFEM) is reserved for high school graduates only. For you (as a DTS Bac+2 holder), the only possible way is through 'Passerelles' (bridging exams) to enter upper years, which **mandatorily** requires obtaining a Bac+3 degree (like a Professional Bachelor's) first to enter the 4th year (Master's program).",
+                s3_path1_title: "Path 1: The Technical Expert (The Fast Track)",
+                s3_path1_desc: "Fully focus on the technical specialization (development or infrastructure), aiming to enter the job market quickly and achieve financial independence. This path relies on building expertise through strong professional certifications.",
+                s3_path1_pro1_title: "Pro:",
+                s3_path1_pro1_desc: "High starting salary and rapid employment.",
+                s3_path1_con1_title: "Con:",
+                s3_path1_con1_desc: "Moves away from the management goal and may require a career 'pivot' later if you change your mind.",
+                s3_path2_title: "Path 2: The Future Leader (The Marathon)",
+                s3_path2_desc: "Use the DTS as a stepping stone, then cross the academic 'bridge' via a carefully selected Professional Bachelor's (LP), aiming for a master's at ENCG or another business school.",
+                s3_path2_pro1_title: "Pro:",
+                s3_path2_pro1_desc: "Huge long-term growth potential and leadership roles.",
+                s3_path2_con1_title: "Con:",
+                s3_path2_con1_desc: "Longer path (3 more years) and requires continuous academic excellence.",
+                lp_bridge_title: "The Academic Bridge: Recommended Professional Bachelor's (LP) Programs",
+                lp_bridge_desc: "Whether you choose the second path or want to leave the door open, and based on your OFPPT specialization, these are the best professional degree programs you can target to reshape your academic profile and achieve a strategic 'turn' towards management if necessary.",
+                s4_title: "4. Execution: Connecting with the Job Market",
                 s4_desc: "Whether as a primary option or a backup plan, the OFPPT diploma offers strong job market opportunities. This section shows you where the opportunities lie and how to increase your value.",
                 s4_chart_title: "Top Recruiting Sectors in Morocco (2025-2027)",
                 s4_certs_title: "Boost your profile with professional certifications",
@@ -376,7 +444,7 @@
                 cert_dev_title: "For Digital Development:",
                 cert_infra_title: "For Infrastructure:",
                 cert_gestion_title: "For Business Management:",
-                s5_title: "5. Execution (Plan A): Your Personal Timeline",
+                s5_title: "5. Your Personal Timeline",
                 s5_desc: "This is the practical part. Based on your final admission result, choose the scenario that suits you to see the recommended action plan, organized by timeline.",
                 scenario_a: "Scenario A: Admission in Business Management",
                 scenario_b: "Scenario B: Admission in a technical track",
@@ -389,14 +457,14 @@
                     gestion: { title: 'Business Management', description: 'The most versatile and business-oriented specialization, preparing you for administrative, accounting, and commercial tasks.', salary: '5,000 - 7,000 MAD', goal: 'High', curriculum: "<ul><li class='mt-1'><strong>Year 1:</strong> General Accounting, Marketing Principles, Business Law, Statistics.</li><li class='mt-1'><strong>Year 2 (Spec.):</strong> Strategic Marketing, Corporate Taxation, HR Management, Project Management.</li></ul>", chartData: [9, 8, 5, 6] }
                 },
                 lp_data: {
-                    dev: [{ name: "Web and Mobile Application Engineering", school: "EST Salé - UM5", value: "Build on your technical skills with a university degree." }, { name: "Full Stack Web Development and DevOps", school: "MegaCampus (Private)", value: "Acquire advanced, in-demand market skills." }],
-                    infra: [{ name: "Systems, Networks and Cyber Security Administration", school: "EST Casablanca - UH2C", value: "Deepen your specialization in a vital field." }, { name: "Administration and Cybersecurity", school: "ENSET Mohammedia", value: "Obtain a university degree with a strong security specialization." }],
+                    dev: [{ name: "Web and Mobile Application Engineering", school: "EST Salé - UM5", value: "Build on your technical skills with a university degree." }, { name: "Digital Marketing and E-Business", school: "FSJES Souissi - UM5", value: "Ideal pivot LP to shift towards management." }],
+                    infra: [{ name: "Systems, Networks and Cyber Security Administration", school: "EST Casablanca - UH2C", value: "Deepen your specialization in a vital field." }, { name: "Management and Information Systems", school: "ENSIAS - UM5", value: "A rare pivot LP combining infrastructure and management." }],
                     gestion: [{ name: "Digital Marketing Management and E-commerce", school: "FSJES Souissi - UM5", value: "The most direct bridge to an ENCG master's in a relevant field." }, { name: "Management of Organizations: Creation and Management of SMEs", school: "FSJES Ain Chock - UH2C", value: "Develop comprehensive and direct managerial skills." }]
                 },
                 plan_data: {
-                    a: { immediate: "<strong>Accept the offer immediately.</strong> This is your 'Golden Ticket' to your goal.", medium: "<strong>Excel academically</strong> and get the Google Digital Marketing certification.", long: "Apply for an LP in Marketing/Management, then apply to ENCG's Master's programs." },
-                    b: { immediate: "<strong>Accept the offer.</strong> This is an excellent career path and your most likely outcome.", medium: "<strong>Decision point:</strong> Do you commit to the tech path or still aim for ENCG? If tech, get certifications (AWS, CCNA).", long: "If the ENCG goal remains, seek a 'pivot' LP that combines IT and management (e.g., E-Business)." },
-                    c: { immediate: "<strong>Check the OFPPT website</strong> for additional admission phases.", medium: "<strong>Re-evaluate:</strong> Consider applying for DUT or BTS programs for the next year.", long: "<strong>As an alternative,</strong> enroll in the Faculty of Economics to get a DEUG, another direct path to ENCG." }
+                    a: { immediate: "<strong>Accept the offer immediately.</strong> This is the 'royal road' to your management goal.", medium: "<strong>Excel academically</strong> and get the Google Digital Marketing certification to boost your profile.", long: "Apply for an LP in Marketing/Management, then apply to ENCG's Master's programs." },
+                    b: { immediate: "<strong>Accept the offer.</strong> This is an excellent career path. <strong>You are now at a crucial decision point.</strong>", medium: "<strong>Option 1 (Tech Expert):</strong> Focus on excelling in DTS and getting tech certifications (AWS, CCNA). <strong>Option 2 (Future Leader):</strong> Excel in DTS and start researching a 'pivot' LP (e.g., E-Business) to prepare for ENCG.", long: "Based on your decision: either become a sought-after developer/network expert, or continue with an LP and then ENCG." },
+                    c: { immediate: "<strong>Check the OFPPT website</strong> for additional admission phases.", medium: "<strong>Re-evaluate:</strong> Consider applying for DUT or BTS programs for the next year (they provide direct access to the ENCG S5 bridge).", long: "<strong>As an alternative,</strong> enroll in the Faculty of Economics to get a DEUG, another direct path to ENCG." }
                 },
                 timeline_titles: { immediate: "Immediate Action Plan (Aug - Sep 2025)", medium: "Medium-Term Plan (2025 - 2027)", long: "Long-Term Vision (2027 and beyond)" },
                  charts: { radar_labels: ['ENCG Alignment', 'Job Opportunities', 'Technical Skills', 'Starting Salary'], radar_dataset_label: 'Track Evaluation', bar_labels: ['IT', 'Banking & Finance', 'Call Centers', 'Industry', 'Tourism'], bar_dataset_label: 'Job Demand', tooltip_label: 'Demand Index' }
@@ -449,10 +517,11 @@
         function updateLpRecommendations() {
             const container = document.getElementById('lp-recommendations');
             const lpData = translations[currentLang].lp_data;
+            const trackData = translations[currentLang].track_data;
             let html = '';
             
             Object.keys(lpData).forEach(trackKey => {
-                const trackTitle = translations[currentLang].track_data[trackKey].title;
+                const trackTitle = trackData[trackKey].title;
                 html += `<div class="mb-4"><h4 class="font-bold tajawal-bold text-indigo-700">${trackTitle}</h4><div class="space-y-2 mt-2">`;
                 lpData[trackKey].forEach(lp => {
                     html += `<div class="p-3 bg-gray-50 rounded-md border"><p class="font-semibold text-gray-800">${lp.name}</p><p class="text-xs text-gray-500">${lp.school}</p><p class="text-sm text-gray-600 mt-1">${lp.value}</p></div>`;
