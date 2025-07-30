@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة التحكم الاستراتيجية | هدى أورح</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Calm Harmony (Warm Neutrals with Indigo Accent) -->
+    <!-- Application Structure Plan: An interactive dashboard structure was chosen over a linear report to empower the user (Hoda) to actively explore and compare her options. The structure is task-oriented: 1. Dashboard for a quick overview. 2. Track Analysis for deep comparison. 3. ENCG Bridge for goal-specific strategy. 4. Job Market for career context. 5. My Plan for actionable steps. This non-linear approach promotes understanding and decision-making by allowing the user to navigate based on her immediate questions, making the complex information digestible and actionable. -->
+    <!-- Visualization & Content Choices: Report Info -> Goal -> Viz/Presentation Method -> Interaction -> Justification -> Library/Method. 1. Application Status -> Inform -> Color-coded cards (HTML/CSS) -> Hover for details -> Quick visual assessment of chances. 2. Specialization Comparison -> Compare -> Tabbed interface with Radar & Bar charts (Chart.js) -> Click tabs to update charts -> Allows direct, multi-criteria comparison of tracks (salary, skills, goal alignment). 3. Path to ENCG -> Organize -> Visual flowchart (HTML/Flexbox) -> Static visual -> Simplifies a complex, multi-step process into an easy-to-follow diagram. 4. Job Market Data -> Inform/Compare -> Bar chart & interactive cards (Chart.js/JS) -> Click cards for details -> Presents market context visually and allows exploration of valuable certifications. This approach uses the best tool for each communication goal, prioritizing clarity and interaction. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <style>
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #F9FAFB;
+        }
+        .en-font { font-family: 'Poppins', sans-serif; }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        .tajawal-bold { font-weight: 700; }
+        .tajawal-medium { font-weight: 500; }
+        .tajawal-regular { font-weight: 400; }
+        .active-tab {
+            border-color: #4F46E5;
+            color: #4F46E5;
+            background-color: #EEF2FF;
+        }
+        .inactive-tab {
+            border-color: transparent;
+            color: #6B7280;
+        }
+        .section-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            border: 1px solid #E5E7EB;
+            padding: 1.5rem;
+            transition: all 0.3s ease-in-out;
+        }
+        .scenario-btn.active {
+            background-color: #4F46E5;
+            color: white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+        .lang-btn.active {
+             background-color: #4F46E5;
+             color: white;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <div id="password-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-80 flex items-center justify-center z-50">
+        <div class="bg-white p-8 rounded-lg shadow-2xl text-center w-11/12 max-w-sm">
+            <h2 class="text-2xl font-bold mb-4 tajawal-bold">الوصول محمي</h2>
+            <p class="text-gray-600 mb-6 tajawal-regular">الرجاء إدخال كلمة المرور لعرض لوحة التحكم.</p>
+            <form id="password-form">
+                <input type="password" id="password-input" class="w-full px-4 py-2 border border-gray-300 rounded-lg text-center" placeholder="كلمة المرور">
+                <p id="password-error" class="text-red-500 text-sm mt-2 h-4"></p>
+                <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-2 px-4 rounded-lg hover:bg-indigo-700 transition mt-4 tajawal-bold">
+                    دخول
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div id="main-content" class="hidden">
+        <div class="container mx-auto p-4 md:p-8">
+            
+            <div id="lang-switcher-container" class="fixed top-4 right-4 z-50">
+                <div class="flex space-x-1 border rounded-lg p-1 bg-gray-200 shadow-lg" dir="ltr">
+                    <button class="lang-btn px-3 py-1 text-sm font-semibold rounded-md transition" data-lang="en">EN</button>
+                    <button class="lang-btn px-3 py-1 text-sm font-semibold rounded-md transition" data-lang="fr">FR</button>
+                    <button class="lang-btn px-3 py-1 text-sm font-semibold rounded-md transition active" data-lang="ar">AR</button>
+                </div>
+            </div>
+
+            <header class="text-center mb-12 pt-12 md:pt-0">
+                <h1 data-key="main_title" class="text-4xl md:text-5xl font-bold text-gray-900 tajawal-bold">لوحة التحكم الاستراتيجية</h1>
+                <p data-key="main_subtitle" class="text-lg text-gray-600 mt-2 tajawal-regular">مخططكِ الشخصي للمسار الدراسي والمهني | هدى أورح</p>
+            </header>
+
+            <main class="space-y-12">
+                <section id="dashboard" class="section-card">
+                    <h2 data-key="s1_title" class="text-2xl font-bold mb-6 tajawal-bold border-b-2 border-indigo-500 pb-2">لوحة التحكم: نظرة شاملة</h2>
+                    <p data-key="s1_desc" class="mb-8 text-gray-600 tajawal-regular">هذا القسم يقدم لكِ ملخصاً سريعاً لوضعكِ الحالي وأهم النقاط الاستراتيجية التي يجب التركيز عليها. استخدميه كنقطة انطلاق لفهم وضعكِ العام قبل الغوص في التفاصيل.</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 text-center">
+                        <div class="bg-gray-100 p-4 rounded-lg border border-gray-200">
+                            <h3 data-key="track1_name" class="font-bold text-lg tajawal-bold">التطوير الرقمي</h3>
+                            <p data-key="track1_status" class="text-orange-500 font-semibold my-2 tajawal-medium">🟠 في لائحة الانتظار</p>
+                            <p data-key="track1_chance" class="text-sm text-gray-500 tajawal-regular">فرصة متوسطة، تعتمد على انسحاب المقبولين.</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg border border-gray-200">
+                            <h3 data-key="track2_name" class="font-bold text-lg tajawal-bold">البنية التحتية الرقمية</h3>
+                            <p data-key="track2_status" class="text-red-500 font-semibold my-2 tajawal-medium">🟠 لائحة التنظيم (Régulation)</p>
+                            <p data-key="track2_chance" class="text-sm text-gray-500 tajawal-regular">فرصة ضعيفة جداً، منافسة على مستوى جهوي.</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg border border-gray-200">
+                            <h3 data-key="track3_name" class="font-bold text-lg tajawal-bold">تسيير المقاولات</h3>
+                            <p data-key="track3_status" class="text-red-500 font-semibold my-2 tajawal-medium">🟠 لائحة التنظيم (Régulation)</p>
+                            <p data-key="track3_chance" class="text-sm text-gray-500 tajawal-regular">فرصة ضعيفة جداً، لكنه المسار الأنسب لهدف ENCG.</p>
+                        </div>
+                        <div class="bg-gray-100 p-4 rounded-lg border border-gray-200">
+                            <h3 data-key="track4_name" class="font-bold text-lg tajawal-bold">التطوير الرقمي (1A)</h3>
+                            <p data-key="track4_status" class="text-blue-500 font-semibold my-2 tajawal-medium">⏳ قيد الانتظار</p>
+                            <p data-key="track4_chance" class="text-sm text-gray-500 tajawal-regular">فرصة متبقية غير معروفة، يجب متابعتها.</p>
+                        </div>
+                    </div>
+                    <div class="mt-8 bg-indigo-50 border-r-4 border-indigo-500 p-4 rounded-r-lg">
+                        <h3 data-key="s1_insight_title" class="font-bold text-indigo-900 tajawal-bold">💡 رؤية استراتيجية أساسية</h3>
+                        <p data-key="s1_insight_text" class="text-indigo-800 mt-2 tajawal-regular">الهدف الأسمى (ENCG) لا يمكن تحقيقه مباشرة عبر شهادة التقني المتخصص (DTS). **الإجازة المهنية (Bac+3)** بعد التخرج هي الجسر الإلزامي والمضمون لتحويل ملفكِ وجعله مؤهلاً للمنافسة على مقاعد الماستر في ENCG.</p>
+                    </div>
+                </section>
+
+                <section id="tracks" class="section-card">
+                    <h2 data-key="s2_title" class="text-2xl font-bold mb-6 tajawal-bold border-b-2 border-indigo-500 pb-2">تحليل المسارات: مقارنة تفاعلية</h2>
+                    <p data-key="s2_desc" class="mb-8 text-gray-600 tajawal-regular">هنا يمكنكِ المقارنة بين التخصصات الثلاثة الرئيسية التي اخترتِها. اضغطي على اسم كل تخصص لرؤية تفاصيله، بما في ذلك المهارات المكتسبة، متوسط الراتب المبدئي، ومدى توافقه مع أهدافكِ.</p>
+                    <div class="border-b border-gray-200 mb-6">
+                        <nav class="-mb-px flex space-x-4 space-x-reverse" aria-label="Tabs">
+                            <button id="tab-dev" data-key="tab_dev" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm active-tab tajawal-medium">التطوير الرقمي</button>
+                            <button id="tab-infra" data-key="tab_infra" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm inactive-tab tajawal-medium">البنية التحتية الرقمية</button>
+                            <button id="tab-gestion" data-key="tab_gestion" class="whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm inactive-tab tajawal-medium">تسيير المقاولات</button>
+                        </nav>
+                    </div>
+                    <div id="content-container" class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 id="track-title" class="text-xl font-bold mb-2 tajawal-bold"></h3>
+                            <p id="track-description" class="text-gray-600 mb-4 tajawal-regular"></p>
+                            <div class="space-y-3">
+                                <div class="flex items-center"><span class="text-green-500 text-xl">💰</span><span data-key="label_salary" class="mr-3 tajawal-medium">متوسط الراتب المبدئي:</span><span id="track-salary" class="font-bold tajawal-bold"></span></div>
+                                <div class="flex items-center"><span class="text-blue-500 text-xl">🎯</span><span data-key="label_goal" class="mr-3 tajawal-medium">التوافق مع هدف ENCG:</span><span id="track-goal" class="font-bold tajawal-bold"></span></div>
+                                <div class="flex items-center"><span class="text-purple-500 text-xl">🔧</span><span data-key="label_skills" class="mr-3 tajawal-medium">أهم المهارات التقنية:</span><span id="track-skills" class="text-sm text-gray-700 tajawal-regular"></span></div>
+                            </div>
+                        </div>
+                        <div class="chart-container"><canvas id="trackComparisonChart"></canvas></div>
+                    </div>
+                </section>
+
+                <section id="encg-bridge" class="section-card">
+                    <h2 data-key="s3_title" class="text-2xl font-bold mb-6 tajawal-bold border-b-2 border-indigo-500 pb-2">جسر ENCG: الطريق إلى هدفك</h2>
+                    <p data-key="s3_desc" class="mb-8 text-gray-600 tajawal-regular">كما ذكرنا، الطريق المباشر إلى ENCG غير متاح. هذا القسم يوضح لكِ المسار الاستراتيجي الموصى به والمكون من خطوتين، والذي يحول شهادتكِ المهنية إلى تذكرة دخول للتعليم الجامعي العالي.</p>
+                    <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 md:space-x-reverse">
+                        <div class="text-center p-6 bg-gray-100 rounded-lg shadow-sm w-full md:w-1/3"><div class="text-3xl mb-2">1️⃣</div><h3 data-key="step1_title" class="text-lg font-bold tajawal-bold">التخرج من OFPPT</h3><p data-key="step1_desc" class="text-sm text-gray-600 tajawal-regular">الحصول على دبلوم تقني متخصص (DTS) بمعدل مرتفع.</p></div>
+                        <div class="text-5xl text-indigo-400 font-thin transform md:-translate-y-2">→</div>
+                        <div class="text-center p-6 bg-indigo-100 rounded-lg shadow-sm w-full md:w-1/3 border-2 border-indigo-500"><div class="text-3xl mb-2">2️⃣</div><h3 data-key="step2_title" class="text-lg font-bold text-indigo-900 tajawal-bold">الإجازة المهنية (LP)</h3><p data-key="step2_desc" class="text-sm text-indigo-700 tajawal-regular">الحصول على شهادة (Bac+3) من جامعة معترف بها.</p></div>
+                        <div class="text-5xl text-indigo-400 font-thin transform md:-translate-y-2">→</div>
+                        <div class="text-center p-6 bg-green-100 rounded-lg shadow-sm w-full md:w-1/3"><div class="text-3xl mb-2">✅</div><h3 data-key="step3_title" class="text-lg font-bold text-green-900 tajawal-bold">الوصول إلى ENCG</h3><p data-key="step3_desc" class="text-sm text-green-700 tajawal-regular">التقديم لمباراة الماستر أو الممر S7.</p></div>
+                    </div>
+                </section>
+
+                <section id="job-market" class="section-card">
+                    <h2 data-key="s4_title" class="text-2xl font-bold mb-6 tajawal-bold border-b-2 border-indigo-500 pb-2">سوق الشغل: الفرص والتوقعات</h2>
+                    <p data-key="s4_desc" class="mb-8 text-gray-600 tajawal-regular">سواء اخترتِ العمل مباشرة بعد التخرج أو إكمال دراستكِ، من المهم معرفة واقع سوق الشغل. هذا القسم يعرض القطاعات الأكثر طلباً والشهادات المهنية التي تزيد من قيمتكِ.</p>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 data-key="s4_chart_title" class="text-xl font-bold mb-4 tajawal-bold">القطاعات الأكثر توظيفاً في المغرب (2025-2027)</h3>
+                            <p data-key="s4_chart_desc" class="text-gray-600 mb-4 tajawal-regular">يُظهر الاقتصاد المغربي طلباً متزايداً في القطاعات الرقمية والخدمية. يوضح الرسم البياني القطاعات الرائدة التي توفر فرصاً واعدة للخريجين.</p>
+                            <div class="chart-container h-64 md:h-80"><canvas id="jobMarketChart"></canvas></div>
+                        </div>
+                        <div>
+                            <h3 data-key="s4_certs_title" class="text-xl font-bold mb-4 tajawal-bold">عززي ملفكِ بشهادات مهنية</h3>
+                            <p data-key="s4_certs_desc" class="text-gray-600 mb-4 tajawal-regular">الشهادات المهنية هي أسرع طريقة لإثبات خبرتكِ وزيادة راتبكِ. إليكِ بعض الشهادات عالية القيمة لكل تخصص:</p>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-gray-50 rounded-md border"><h4 data-key="cert_dev_title" class="font-bold tajawal-bold">للتطوير الرقمي:</h4><p class="text-sm text-gray-700 tajawal-regular">Oracle Certified Professional (Java), AWS Certified Developer</p></div>
+                                <div class="p-3 bg-gray-50 rounded-md border"><h4 data-key="cert_infra_title" class="font-bold tajawal-bold">للبنية التحتية:</h4><p class="text-sm text-gray-700 tajawal-regular">Cisco CCNA, CompTIA Security+, AWS Cloud Practitioner</p></div>
+                                <div class="p-3 bg-gray-50 rounded-md border"><h4 data-key="cert_gestion_title" class="font-bold tajawal-bold">لتسيير المقاولات:</h4><p class="text-sm text-gray-700 tajawal-regular">Google Digital Marketing & E-commerce, MOS Expert</p></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="my-plan" class="section-card">
+                    <h2 data-key="s5_title" class="text-2xl font-bold mb-6 tajawal-bold border-b-2 border-indigo-500 pb-2">خطتي الشخصية: ماذا أفعل الآن؟</h2>
+                    <p data-key="s5_desc" class="mb-8 text-gray-600 tajawal-regular">هذا هو الجزء العملي. بناءً على نتيجة قبولكِ النهائية، اختاري السيناريو المناسب لكِ لرؤية خطة العمل الموصى بها خطوة بخطوة.</p>
+                    <div class="flex justify-center space-x-2 md:space-x-4 space-x-reverse mb-8">
+                        <button class="scenario-btn px-4 py-2 rounded-lg font-semibold transition tajawal-medium active" data-scenario="b" data-key="scenario_b">السيناريو (ب): القبول في مسار تقني</button>
+                        <button class="scenario-btn px-4 py-2 rounded-lg font-semibold transition tajawal-medium" data-scenario="a" data-key="scenario_a">السيناريو (أ): القبول في تسيير المقاولات</button>
+                        <button class="scenario-btn px-4 py-2 rounded-lg font-semibold transition tajawal-medium" data-scenario="c" data-key="scenario_c">السيناريو (ج): عدم القبول</button>
+                    </div>
+                    <div id="plan-content" class="bg-gray-50 p-6 rounded-lg border"></div>
+                </section>
+            </main>
+
+            <footer class="text-center mt-16 pt-8 border-t border-gray-200">
+                <p data-key="footer_text" class="text-gray-500 tajawal-regular">تم إعداد هذا التقرير التفاعلي خصيصاً لهدى أورح، يوليوز 2025.</p>
+                <p data-key="footer_quote" class="text-sm text-gray-400 mt-2 tajawal-regular">"أبني مساري بإرادتي، وأصنع مستقبلي بقراراتي."</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            ar: {
+                main_title: "لوحة التحكم الاستراتيجية",
+                main_subtitle: "مخططكِ الشخصي للمسار الدراسي والمهني | هدى أورح",
+                s1_title: "لوحة التحكم: نظرة شاملة",
+                s1_desc: "هذا القسم يقدم لكِ ملخصاً سريعاً لوضعكِ الحالي وأهم النقاط الاستراتيجية التي يجب التركيز عليها. استخدميه كنقطة انطلاق لفهم وضعكِ العام قبل الغوص في التفاصيل.",
+                track1_name: "التطوير الرقمي",
+                track1_status: "🟠 في لائحة الانتظار",
+                track1_chance: "فرصة متوسطة، تعتمد على انسحاب المقبولين.",
+                track2_name: "البنية التحتية الرقمية",
+                track2_status: "🟠 لائحة التنظيم (Régulation)",
+                track2_chance: "فرصة ضعيفة جداً، منافسة على مستوى جهوي.",
+                track3_name: "تسيير المقاولات",
+                track3_status: "🟠 لائحة التنظيم (Régulation)",
+                track3_chance: "فرصة ضعيفة جداً، لكنه المسار الأنسب لهدف ENCG.",
+                track4_name: "التطوير الرقمي (1A)",
+                track4_status: "⏳ قيد الانتظار",
+                track4_chance: "فرصة متبقية غير معروفة، يجب متابعتها.",
+                s1_insight_title: "💡 رؤية استراتيجية أساسية",
+                s1_insight_text: "الهدف الأسمى (ENCG) لا يمكن تحقيقه مباشرة عبر شهادة التقني المتخصص (DTS). **الإجازة المهنية (Bac+3)** بعد التخرج هي الجسر الإلزامي والمضمون لتحويل ملفكِ وجعله مؤهلاً للمنافسة على مقاعد الماستر في ENCG.",
+                s2_title: "تحليل المسارات: مقارنة تفاعلية",
+                s2_desc: "هنا يمكنكِ المقارنة بين التخصصات الثلاثة الرئيسية التي اخترتِها. اضغطي على اسم كل تخصص لرؤية تفاصيله، بما في ذلك المهارات المكتسبة، متوسط الراتب المبدئي، ومدى توافقه مع أهدافكِ.",
+                tab_dev: "التطوير الرقمي",
+                tab_infra: "البنية التحتية الرقمية",
+                tab_gestion: "تسيير المقاولات",
+                label_salary: "متوسط الراتب المبدئي:",
+                label_goal: "التوافق مع هدف ENCG:",
+                label_skills: "أهم المهارات التقنية:",
+                s3_title: "جسر ENCG: الطريق إلى هدفك",
+                s3_desc: "كما ذكرنا، الطريق المباشر إلى ENCG غير متاح. هذا القسم يوضح لكِ المسار الاستراتيجي الموصى به والمكون من خطوتين، والذي يحول شهادتكِ المهنية إلى تذكرة دخول للتعليم الجامعي العالي.",
+                step1_title: "التخرج من OFPPT",
+                step1_desc: "الحصول على دبلوم تقني متخصص (DTS) بمعدل مرتفع.",
+                step2_title: "الإجازة المهنية (LP)",
+                step2_desc: "الحصول على شهادة (Bac+3) من جامعة معترف بها.",
+                step3_title: "الوصول إلى ENCG",
+                step3_desc: "التقديم لمباراة الماستر أو الممر S7.",
+                s4_title: "سوق الشغل: الفرص والتوقعات",
+                s4_desc: "سواء اخترتِ العمل مباشرة بعد التخرج أو إكمال دراستكِ، من المهم معرفة واقع سوق الشغل. هذا القسم يعرض القطاعات الأكثر طلباً والشهادات المهنية التي تزيد من قيمتكِ.",
+                s4_chart_title: "القطاعات الأكثر توظيفاً في المغرب (2025-2027)",
+                s4_chart_desc: "يُظهر الاقتصاد المغربي طلباً متزايداً في القطاعات الرقمية والخدمية. يوضح الرسم البياني القطاعات الرائدة التي توفر فرصاً واعدة للخريجين.",
+                s4_certs_title: "عززي ملفكِ بشهادات مهنية",
+                s4_certs_desc: "الشهادات المهنية هي أسرع طريقة لإثبات خبرتكِ وزيادة راتبكِ. إليكِ بعض الشهادات عالية القيمة لكل تخصص:",
+                cert_dev_title: "للتطوير الرقمي:",
+                cert_infra_title: "للبنية التحتية:",
+                cert_gestion_title: "لتسيير المقاولات:",
+                s5_title: "خطتي الشخصية: ماذا أفعل الآن؟",
+                s5_desc: "هذا هو الجزء العملي. بناءً على نتيجة قبولكِ النهائية، اختاري السيناريو المناسب لكِ لرؤية خطة العمل الموصى بها خطوة بخطوة.",
+                scenario_a: "السيناريو (أ): القبول في تسيير المقاولات",
+                scenario_b: "السيناريو (ب): القبول في مسار تقني",
+                scenario_c: "السيناريو (ج): عدم القبول",
+                footer_text: "تم إعداد هذا التقرير التفاعلي خصيصاً لهدى أورح، يوليوز 2025.",
+                footer_quote: "\"أبني مساري بإرادتي، وأصنع مستقبلي بقراراتي.\"",
+                track_data: {
+                    dev: { title: 'التطوير الرقمي (Développement Digital)', description: 'هذا التخصص يؤهلكِ لتصبحي خبيرة في صناعة البرمجيات، وتصميم وتطوير وصيانة تطبيقات الويب والهاتف المحمول.', salary: '10,000 - 12,000 درهم', goal: 'منخفض', skills: 'Java, Python, React, SQL, Flutter', chartData: [3, 9, 9, 8] },
+                    infra: { title: 'البنية التحتية الرقمية (Infrastructure Digitale)', description: 'هذا المسار يؤهلكِ لتكوني مسؤولة عن استغلال وتأمين وتحسين موارد تكنولوجيا المعلومات، بما في ذلك الشبكات والخوادم.', salary: '5,000 - 7,000 درهم', goal: 'منخفض', skills: 'Cisco IOS, Linux, Windows Server, Cybersecurity tools', chartData: [3, 7, 8, 6] },
+                    gestion: { title: 'تسيير المقاولات (Gestion des Entreprises)', description: 'التخصص الأكثر تنوعاً وتوجهاً نحو الأعمال، ويؤهلكِ للتعامل مع المهام الإدارية والمحاسبية والتجارية داخل الشركة.', salary: '5,000 - 7,000 درهم', goal: 'مرتفع', skills: 'Accounting software, CRM, Excel, Marketing strategy', chartData: [9, 8, 5, 6] }
+                },
+                plan_data: {
+                    a: { title: 'خطة السيناريو (أ): القبول في تسيير المقاولات - "التذكرة الذهبية"', steps: ["<strong>الخطوة 1 (أثناء DTS):</strong> التفوق أكاديمياً والحصول على شهادة Google Digital Marketing.", "<strong>الخطوة 2 (بعد DTS):</strong> التقديم لإجازة مهنية في التسويق أو الإدارة في جامعة عمومية.", "<strong>الخطوة 3 (بعد الإجازة):</strong> التقديم لبرامج الماستر في ENCG بملف قوي وموجه."] },
+                    b: { title: 'خطة السيناريو (ب): القبول في مسار تقني - "الخيار الواقعي"', steps: ["<strong>الخطوة 1 (قرار حاسم):</strong> هل تلتزمين بالمسار التقني المربح أم لا زلتِ تستهدفين ENCG؟", "<strong>الخطوة 2 (إذا اخترتِ المسار التقني):</strong> تفوقي في DTS واحصلي على شهادات مهنية قوية (AWS, CCNA).", "<strong>الخطوة 3 (إذا بقي هدف ENCG):</strong> يجب عليكِ البحث عن إجازة مهنية 'محورية' تجمع بين تكنولوجيا المعلومات والإدارة (مثل E-Business) لتكوني مؤهلة للتقديم."] },
+                    c: { title: 'خطة السيناريو (ج): عدم القبول - "إعادة التقييم"', steps: ["<strong>الخطوة 1 (إجراء فوري):</strong> البحث في موقع OFPPT عن أي مراحل قبول إضافية أو برامج لا تزال بها مقاعد شاغرة.", "<strong>الخطوة 2 (بديل استراتيجي):</strong> التفكير في التقديم لـ DUT أو BTS للعام القادم، فهي مسارات مباشرة إلى ENCG.", "<strong>الخطوة 3 (بديل جامعي):</strong> التسجيل في كلية الاقتصاد للحصول على DEUG، وهو مسار مباشر آخر لـ ENCG."] }
+                },
+                charts: {
+                    radar_labels: ['التوافق مع ENCG', 'فرص الشغل', 'المهارات التقنية', 'الراتب المبدئي'],
+                    radar_dataset_label: 'تقييم المسار',
+                    bar_labels: ['تكنولوجيا المعلومات', 'البنوك والمالية', 'مراكز الاتصال', 'الصناعة', 'السياحة'],
+                    bar_dataset_label: 'الطلب على الوظائف',
+                    tooltip_label: 'مؤشر الطلب'
+                }
+            },
+            fr: {
+                main_title: "Tableau de Bord Stratégique",
+                main_subtitle: "Votre Plan Personnel de Carrière Académique et Professionnelle | Houda Ourh",
+                s1_title: "Tableau de Bord : Vue d'Ensemble",
+                s1_desc: "Cette section vous offre un résumé rapide de votre situation actuelle et des points stratégiques clés. Utilisez-la comme point de départ pour comprendre votre position globale avant de plonger dans les détails.",
+                track1_name: "Développement Digital",
+                track1_status: "🟠 En liste d'attente",
+                track1_chance: "Chance moyenne, dépend des désistements.",
+                track2_name: "Infrastructure Digitale",
+                track2_status: "🟠 En liste de Régulation",
+                track2_chance: "Chance très faible, compétition régionale.",
+                track3_name: "Gestion des Entreprises",
+                track3_status: "🟠 En liste de Régulation",
+                track3_chance: "Chance très faible, mais la voie la plus pertinente pour l'ENCG.",
+                track4_name: "Développement Digital (1A)",
+                track4_status: "⏳ En attente",
+                track4_chance: "Chance résiduelle inconnue, à suivre.",
+                s1_insight_title: "💡 Vision Stratégique Essentielle",
+                s1_insight_text: "L'objectif ultime (ENCG) n'est pas directement accessible avec un DTS. La **Licence Professionnelle (Bac+3)** après le diplôme est le pont obligatoire et garanti pour rendre votre dossier éligible à la compétition pour les masters de l'ENCG.",
+                s2_title: "Analyse des Filières : Comparaison Interactive",
+                s2_desc: "Comparez ici les trois principales filières que vous avez choisies. Cliquez sur chaque filière pour voir ses détails, y compris les compétences acquises, le salaire de départ moyen et l'alignement avec vos objectifs.",
+                tab_dev: "Développement Digital",
+                tab_infra: "Infrastructure Digitale",
+                tab_gestion: "Gestion des Entreprises",
+                label_salary: "Salaire de départ moyen :",
+                label_goal: "Alignement avec l'objectif ENCG :",
+                label_skills: "Compétences techniques clés :",
+                s3_title: "Le Pont vers l'ENCG : Votre Chemin vers l'Objectif",
+                s3_desc: "Comme mentionné, l'accès direct à l'ENCG n'est pas possible. Cette section illustre le parcours stratégique recommandé en deux étapes, qui transforme votre diplôme professionnel en un billet d'entrée pour l'enseignement supérieur.",
+                step1_title: "Diplôme de l'OFPPT",
+                step1_desc: "Obtenir un Diplôme de Technicien Spécialisé (DTS) avec une excellente moyenne.",
+                step2_title: "Licence Professionnelle (LP)",
+                step2_desc: "Obtenir un diplôme (Bac+3) d'une université reconnue.",
+                step3_title: "Accès à l'ENCG",
+                step3_desc: "Postuler au concours Master ou à la passerelle S7.",
+                s4_title: "Marché du Travail : Opportunités et Attentes",
+                s4_desc: "Que vous choisissiez de travailler directement après l'obtention de votre diplôme ou de poursuivre vos études, il est crucial de connaître la réalité du marché du travail. Cette section présente les secteurs les plus demandeurs et les certifications qui augmentent votre valeur.",
+                s4_chart_title: "Secteurs les plus Recruteurs au Maroc (2025-2027)",
+                s4_chart_desc: "L'économie marocaine montre une demande croissante dans les secteurs du numérique et des services. Le graphique illustre les secteurs de pointe offrant des opportunités prometteuses aux diplômés.",
+                s4_certs_title: "Renforcez votre profil avec des certifications professionnelles",
+                s4_certs_desc: "Les certifications sont le moyen le plus rapide de prouver votre expertise et d'augmenter votre salaire. Voici quelques certifications de grande valeur pour chaque spécialité :",
+                cert_dev_title: "Pour le Développement Digital :",
+                cert_infra_title: "Pour l'Infrastructure :",
+                cert_gestion_title: "Pour la Gestion d'Entreprises :",
+                s5_title: "Mon Plan Personnel : Que faire maintenant ?",
+                s5_desc: "C'est la partie pratique. En fonction de votre résultat d'admission final, choisissez le scénario qui vous convient pour voir le plan d'action recommandé, étape par étape.",
+                scenario_a: "Scénario A : Admission en Gestion d'Entreprises",
+                scenario_b: "Scénario B : Admission en filière technique",
+                scenario_c: "Scénario C : Non-admission",
+                footer_text: "Ce rapport interactif a été préparé spécialement pour Houda Ourh, Juillet 2025.",
+                footer_quote: "\"Je construis mon parcours avec ma volonté, et je façonne mon avenir avec mes décisions.\"",
+                 track_data: {
+                    dev: { title: 'Développement Digital', description: 'Cette spécialité vous prépare à devenir un expert en génie logiciel, en concevant, développant et maintenant des applications web et mobiles.', salary: '10,000 - 12,000 MAD', goal: 'Faible', skills: 'Java, Python, React, SQL, Flutter', chartData: [3, 9, 9, 8] },
+                    infra: { title: 'Infrastructure Digitale', description: 'Ce parcours vous prépare à être responsable de l\'exploitation, de la sécurisation et de l\'optimisation des ressources informatiques, y compris les réseaux et les serveurs.', salary: '5,000 - 7,000 MAD', goal: 'Faible', skills: 'Cisco IOS, Linux, Windows Server, Outils de cybersécurité', chartData: [3, 7, 8, 6] },
+                    gestion: { title: 'Gestion des Entreprises', description: 'La spécialité la plus polyvalente et orientée business, vous préparant aux tâches administratives, comptables et commerciales au sein de l\'entreprise.', salary: '5,000 - 7,000 MAD', goal: 'Élevé', skills: 'Logiciels comptables, CRM, Excel, Stratégie marketing', chartData: [9, 8, 5, 6] }
+                },
+                plan_data: {
+                    a: { title: 'Plan Scénario A : Admission en Gestion d\'Entreprises - "Le Ticket d\'Or"', steps: ["<strong>Étape 1 (Pendant le DTS) :</strong> Exceller académiquement et obtenir la certification Google Digital Marketing.", "<strong>Étape 2 (Après le DTS) :</strong> Postuler à une Licence Professionnelle en Marketing ou Gestion dans une université publique.", "<strong>Étape 3 (Après la LP) :</strong> Postuler aux programmes de Master de l'ENCG avec un dossier solide et ciblé."] },
+                    b: { title: 'Plan Scénario B : Admission en filière technique - "L\'Option Réaliste"', steps: ["<strong>Étape 1 (Décision cruciale) :</strong> Vous engagez-vous dans la voie technique lucrative ou visez-vous toujours l'ENCG ?", "<strong>Étape 2 (Si vous choisissez la voie technique) :</strong> Excellez dans votre DTS et obtenez des certifications professionnelles de valeur (AWS, CCNA).", "<strong>Étape 3 (Si l'objectif ENCG demeure) :</strong> Vous devez trouver une Licence Professionnelle 'pivot' qui combine l'informatique et la gestion (ex: E-Business) pour être éligible."] },
+                    c: { title: 'Plan Scénario C : Non-admission - "Réévaluation"', steps: ["<strong>Étape 1 (Action immédiate) :</strong> Vérifier sur le site de l'OFPPT s'il y a des phases d'admission supplémentaires ou des programmes avec des places vacantes.", "<strong>Étape 2 (Alternative stratégique) :</strong> Envisager de postuler à un DUT ou BTS pour l'année suivante, car ce sont des voies d'accès directes à l'ENCG.", "<strong>Étape 3 (Alternative universitaire) :</strong> S'inscrire en Faculté d'Économie pour obtenir un DEUG, une autre voie d'accès directe à l'ENCG."] }
+                },
+                charts: {
+                    radar_labels: ['Alignement ENCG', 'Opportunités d\'emploi', 'Compétences Techniques', 'Salaire de départ'],
+                    radar_dataset_label: 'Évaluation de la filière',
+                    bar_labels: ['Informatique', 'Banque & Finance', 'Centres d\'appels', 'Industrie', 'Tourisme'],
+                    bar_dataset_label: 'Demande d\'emploi',
+                    tooltip_label: 'Indice de demande'
+                }
+            },
+            en: {
+                main_title: "Strategic Dashboard",
+                main_subtitle: "Your Personal Academic and Professional Career Plan | Houda Ourh",
+                s1_title: "Dashboard: Overview",
+                s1_desc: "This section provides a quick summary of your current situation and key strategic points. Use it as a starting point to understand your overall position before diving into details.",
+                track1_name: "Digital Development",
+                track1_status: "🟠 On waiting list",
+                track1_chance: "Medium chance, depends on withdrawals.",
+                track2_name: "Digital Infrastructure",
+                track2_status: "🟠 On Regulation list",
+                track2_chance: "Very low chance, regional competition.",
+                track3_name: "Business Management",
+                track3_status: "🟠 On Regulation list",
+                track3_chance: "Very low chance, but the most relevant path for ENCG.",
+                track4_name: "Digital Development (1A)",
+                track4_status: "⏳ Pending",
+                track4_chance: "Unknown residual chance, to be monitored.",
+                s1_insight_title: "💡 Key Strategic Insight",
+                s1_insight_text: "The ultimate goal (ENCG) is not directly accessible with a DTS diploma. The **Professional Bachelor's Degree (Bac+3)** after graduation is the mandatory and guaranteed bridge to make your profile eligible to compete for ENCG's master's programs.",
+                s2_title: "Track Analysis: Interactive Comparison",
+                s2_desc: "Here you can compare the three main specializations you have chosen. Click on each track to see its details, including acquired skills, average starting salary, and alignment with your goals.",
+                tab_dev: "Digital Development",
+                tab_infra: "Digital Infrastructure",
+                tab_gestion: "Business Management",
+                label_salary: "Average starting salary:",
+                label_goal: "Alignment with ENCG goal:",
+                label_skills: "Key technical skills:",
+                s3_title: "The ENCG Bridge: Your Path to the Goal",
+                s3_desc: "As mentioned, direct access to ENCG is not available. This section illustrates the recommended two-step strategic path, which transforms your vocational diploma into an entry ticket for higher education.",
+                step1_title: "Graduate from OFPPT",
+                step1_desc: "Obtain a Specialized Technician Diploma (DTS) with a high GPA.",
+                step2_title: "Professional Bachelor's (LP)",
+                step2_desc: "Obtain a (Bac+3) degree from a recognized university.",
+                step3_title: "Access to ENCG",
+                step3_desc: "Apply for the Master's competition or the S7 gateway.",
+                s4_title: "Job Market: Opportunities and Expectations",
+                s4_desc: "Whether you choose to work immediately after graduation or continue your studies, it's crucial to know the reality of the job market. This section presents the most in-demand sectors and the certifications that increase your value.",
+                s4_chart_title: "Top Recruiting Sectors in Morocco (2025-2027)",
+                s4_chart_desc: "The Moroccan economy shows a growing demand in the digital and service sectors. The chart illustrates the leading sectors offering promising opportunities for graduates.",
+                s4_certs_title: "Boost your profile with professional certifications",
+                s4_certs_desc: "Certifications are the quickest way to prove your expertise and increase your salary. Here are some high-value certifications for each specialty:",
+                cert_dev_title: "For Digital Development:",
+                cert_infra_title: "For Infrastructure:",
+                cert_gestion_title: "For Business Management:",
+                s5_title: "My Personal Plan: What to do now?",
+                s5_desc: "This is the practical part. Based on your final admission result, choose the scenario that suits you to see the recommended action plan, step by step.",
+                scenario_a: "Scenario A: Admission in Business Management",
+                scenario_b: "Scenario B: Admission in a technical track",
+                scenario_c: "Scenario C: Non-admission",
+                footer_text: "This interactive report was prepared specially for Houda Ourh, July 2025.",
+                footer_quote: "\"I build my path with my will, and I shape my future with my decisions.\"",
+                track_data: {
+                    dev: { title: 'Digital Development', description: 'This specialization prepares you to become an expert in software engineering, designing, developing, and maintaining web and mobile applications.', salary: '10,000 - 12,000 MAD', goal: 'Low', skills: 'Java, Python, React, SQL, Flutter', chartData: [3, 9, 9, 8] },
+                    infra: { title: 'Digital Infrastructure', description: 'This path prepares you to be responsible for the operation, security, and optimization of IT resources, including networks and servers.', salary: '5,000 - 7,000 MAD', goal: 'Low', skills: 'Cisco IOS, Linux, Windows Server, Cybersecurity tools', chartData: [3, 7, 8, 6] },
+                    gestion: { title: 'Business Management', description: 'The most versatile and business-oriented specialization, preparing you for administrative, accounting, and commercial tasks within the company.', salary: '5,000 - 7,000 MAD', goal: 'High', skills: 'Accounting software, CRM, Excel, Marketing strategy', chartData: [9, 8, 5, 6] }
+                },
+                plan_data: {
+                    a: { title: 'Plan Scenario A: Admission in Business Management - "The Golden Ticket"', steps: ["<strong>Step 1 (During DTS):</strong> Excel academically and get the Google Digital Marketing certification.", "<strong>Step 2 (After DTS):</strong> Apply for a Professional Bachelor's in Marketing or Management at a public university.", "<strong>Step 3 (After LP):</strong> Apply to ENCG's Master's programs with a strong and focused application."] },
+                    b: { title: 'Plan Scenario B: Admission in a technical track - "The Realistic Option"', steps: ["<strong>Step 1 (Crucial Decision):</strong> Do you commit to the lucrative technical path or do you still aim for ENCG?", "<strong>Step 2 (If you choose the technical path):</strong> Excel in your DTS and get valuable professional certifications (AWS, CCNA).", "<strong>Step 3 (If the ENCG goal remains):</strong> You must find a 'pivot' Professional Bachelor's that combines IT and management (e.g., E-Business) to be eligible."] },
+                    c: { title: 'Plan Scenario C: Non-admission - "Re-evaluation"', steps: ["<strong>Step 1 (Immediate Action):</strong> Check the OFPPT website for any additional admission phases or programs with vacant seats.", "<strong>Step 2 (Strategic Alternative):</strong> Consider applying for a DUT or BTS for the next year, as they are direct entry routes to ENCG.", "<strong>Step 3 (University Alternative):</strong> Enroll in the Faculty of Economics to get a DEUG, another direct entry route to ENCG."] }
+                },
+                 charts: {
+                    radar_labels: ['ENCG Alignment', 'Job Opportunities', 'Technical Skills', 'Starting Salary'],
+                    radar_dataset_label: 'Track Evaluation',
+                    bar_labels: ['IT', 'Banking & Finance', 'Call Centers', 'Industry', 'Tourism'],
+                    bar_dataset_label: 'Job Demand',
+                    tooltip_label: 'Demand Index'
+                }
+            }
+        };
+        
+        let currentLang = 'ar';
+        let trackComparisonChart;
+        let jobMarketChart;
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+            if (lang === 'en' || lang === 'fr') {
+                document.body.classList.add('en-font');
+            } else {
+                document.body.classList.remove('en-font');
+            }
+
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[lang][key]) {
+                    element.innerHTML = translations[lang][key];
+                }
+            });
+            
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                 btn.classList.remove('active');
+                 if(btn.dataset.lang === lang) {
+                     btn.classList.add('active');
+                 }
+            });
+
+            updateAllCharts(lang);
+            updateTrackContent('dev');
+            updatePlanContent('b');
+        }
+
+        function updateAllCharts(lang) {
+            if (trackComparisonChart) trackComparisonChart.destroy();
+            if (jobMarketChart) jobMarketChart.destroy();
+            
+            const chartTranslations = translations[lang].charts;
+            
+            const ctxTrack = document.getElementById('trackComparisonChart').getContext('2d');
+            trackComparisonChart = new Chart(ctxTrack, {
+                type: 'radar',
+                data: {
+                    labels: chartTranslations.radar_labels,
+                    datasets: [{
+                        label: chartTranslations.radar_dataset_label,
+                        data: [],
+                        backgroundColor: 'rgba(79, 70, 229, 0.2)',
+                        borderColor: 'rgba(79, 70, 229, 1)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgba(79, 70, 229, 1)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgba(79, 70, 229, 1)'
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { r: { angleLines: { color: 'rgba(0, 0, 0, 0.1)' }, grid: { color: 'rgba(0, 0, 0, 0.1)' }, pointLabels: { font: { family: lang === 'ar' ? 'Tajawal' : 'Poppins', size: 12 }, color: '#374151' }, ticks: { backdropColor: 'transparent', stepSize: 2, font: { size: 10 } }, min: 0, max: 10 }},
+                    plugins: { legend: { display: false } }
+                }
+            });
+
+            const ctxJobMarket = document.getElementById('jobMarketChart').getContext('2d');
+            jobMarketChart = new Chart(ctxJobMarket, {
+                type: 'bar',
+                data: {
+                    labels: chartTranslations.bar_labels,
+                    datasets: [{
+                        label: chartTranslations.bar_dataset_label,
+                        data: [85, 75, 70, 60, 55],
+                        backgroundColor: ['rgba(79, 70, 229, 0.7)', 'rgba(59, 130, 246, 0.7)', 'rgba(16, 185, 129, 0.7)', 'rgba(249, 115, 22, 0.7)', 'rgba(239, 68, 68, 0.7)'],
+                        borderColor: ['rgba(79, 70, 229, 1)', 'rgba(59, 130, 246, 1)', 'rgba(16, 185, 129, 1)', 'rgba(249, 115, 22, 1)', 'rgba(239, 68, 68, 1)'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false }, tooltip: { callbacks: { label: (context) => `${chartTranslations.tooltip_label}: ${context.raw}` } } },
+                    scales: { x: { beginAtZero: true, grid: { display: false } }, y: { ticks: { font: { family: lang === 'ar' ? 'Tajawal' : 'Poppins' } } } }
+                }
+            });
+        }
+
+        function updateTrackContent(trackKey) {
+            const track = translations[currentLang].track_data[trackKey];
+            document.getElementById('track-title').innerText = track.title;
+            document.getElementById('track-description').innerText = track.description;
+            document.getElementById('track-salary').innerText = track.salary;
+            document.getElementById('track-goal').innerText = track.goal;
+            document.getElementById('track-skills').innerText = track.skills;
+            
+            if (trackComparisonChart) {
+                trackComparisonChart.data.datasets[0].data = track.chartData;
+                trackComparisonChart.update();
+            }
+        }
+        
+        function updatePlanContent(scenarioKey) {
+            const container = document.getElementById('plan-content');
+            const data = translations[currentLang].plan_data[scenarioKey];
+            container.innerHTML = `<h3 class="text-lg font-bold mb-4 tajawal-bold">${data.title}</h3><ul class="space-y-3 list-inside">${data.steps.map(step => `<li class="flex items-start"><span class="text-indigo-500 font-bold mr-2 ml-2 mt-1">✓</span><span class="tajawal-regular">${step}</span></li>`).join('')}</ul>`;
+        }
+        
+        function initializeApp() {
+            setLanguage('ar');
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => setLanguage(e.target.dataset.lang));
+            });
+
+            document.querySelectorAll('#tracks nav button').forEach(tab => {
+                tab.addEventListener('click', () => {
+                    document.querySelectorAll('#tracks nav button').forEach(t => t.classList.replace('active-tab', 'inactive-tab'));
+                    tab.classList.replace('inactive-tab', 'active-tab');
+                    const trackId = tab.id.split('-')[1];
+                    updateTrackContent(trackId);
+                });
+            });
+            
+            document.querySelectorAll('.scenario-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.scenario-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    updatePlanContent(btn.dataset.scenario);
+                });
+            });
+        }
+
+        document.getElementById('password-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const passwordInput = document.getElementById('password-input');
+            const passwordError = document.getElementById('password-error');
+            const correctPassword = "Hoda2025";
+
+            if (passwordInput.value === correctPassword) {
+                document.getElementById('password-overlay').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+                initializeApp();
+            } else {
+                passwordError.textContent = "كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخرى.";
+                passwordInput.classList.add('border-red-500');
+                passwordInput.value = "";
+            }
+        });
+    </script>
+</body>
+</html>
