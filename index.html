@@ -424,7 +424,13 @@
         let trackComparisonChart;
         let jobMarketChart;
 
+        const LANG_KEY = 'hodaDashboardLanguage';
+        const LOGIN_TIMESTAMP_KEY = 'hodaDashboardLoginTimestamp';
+        const LOGIN_EXPIRY_DAYS = 7;
+        const EXPIRY_DURATION_MS = LOGIN_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
+
         function setLanguage(lang) {
+            localStorage.setItem(LANG_KEY, lang);
             currentLang = lang;
             document.documentElement.lang = lang;
             document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
@@ -437,7 +443,7 @@
 
             document.querySelectorAll('[data-key]').forEach(element => {
                 const key = element.getAttribute('data-key');
-                if (translations[lang][key]) {
+                if (translations[lang] && translations[lang][key]) {
                     element.innerHTML = translations[lang][key];
                 }
             });
@@ -479,7 +485,7 @@
                 },
                 options: {
                     responsive: true, maintainAspectRatio: false,
-                    scales: { r: { angleLines: { color: 'rgba(0, 0, 0, 0.1)' }, grid: { color: 'rgba(0, 0, 0, 0.1)' }, pointLabels: { font: { family: lang === 'ar' ? 'Tajawal' : 'Poppins', size: 12 }, color: '#374151' }, ticks: { backdropColor: 'transparent', stepSize: 2, font: { size: 10 } }, min: 0, max: 10 }},
+                    scales: { r: { angleLines: { color: 'rgba(0, 0, 0, 0.1)' }, grid: { color: 'rgba(0, 0, 0, 0.1)' }, pointLabels: { font: { family: lang === 'ar' ? 'Tajawal' : 'Poppins', size: 10 }, color: '#374151' }, ticks: { backdropColor: 'transparent', stepSize: 2, font: { size: 10 } }, min: 0, max: 10 }},
                     plugins: { legend: { display: false } }
                 }
             });
@@ -526,8 +532,6 @@
         }
         
         function initializeApp() {
-            setLanguage('ar');
-
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 btn.addEventListener('click', (e) => setLanguage(e.target.dataset.lang));
             });
@@ -550,13 +554,21 @@
             });
         }
 
-        const LOGIN_TIMESTAMP_KEY = 'hodaDashboardLoginTimestamp';
-        const LOGIN_EXPIRY_DAYS = 7;
-        const EXPIRY_DURATION_MS = LOGIN_EXPIRY_DAYS * 24 * 60 * 60 * 1000;
-
         function showContentAndInit() {
             document.getElementById('password-overlay').style.display = 'none';
             document.getElementById('main-content').style.display = 'block';
+            
+            let initialLang = localStorage.getItem(LANG_KEY);
+            if (!initialLang) {
+                const browserLang = navigator.language.split('-')[0];
+                if (['fr', 'en', 'ar'].includes(browserLang)) {
+                    initialLang = browserLang;
+                } else {
+                    initialLang = 'ar'; 
+                }
+            }
+            
+            setLanguage(initialLang);
             initializeApp();
         }
 
